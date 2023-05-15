@@ -11,22 +11,20 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "team")
-public class TeamHistory {
+@Table(name = "coach")
+public class MatchDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "match_schedule", nullable = false)
+    private MatchSchedule matchSchedule;
     @ManyToOne
-    @JoinColumn(name = "tournament", nullable = false)
-    private Tournament tournament;
-    @ManyToOne
-    @JoinColumn(name = "team", nullable = false)
+    @JoinColumn(name = "winning_team", nullable = false)
     private Team team;
-    @Column(name = "captain", nullable = false)
-    private Player captain;
     @ManyToOne
-    @JoinColumn(name = "coach", nullable = false)
-    private Coach coach;
-    @Column(name = "sponsor", nullable = false)
-    private String sponsor;
+    @JoinColumn(name = "mvp_player", nullable = false)
+    private Player MVPPlayer;
+    @ManyToOne
+    @JoinColumn(name = "caster", nullable = false)
+    private Caster caster;
 }

@@ -17,27 +17,19 @@ public class Player {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "last_name", nullable = false)
-
     private String lastName;
     @Column(name = "middle_name", nullable = false)
-
     private String middleName;
     @Column(name = "first_name", nullable = false)
-
     private String firstName;
     @Column(name = "date_of_birth", nullable = false)
-
     private LocalDate dob;
     @Column(name = "hometown", nullable = false)
-
     private String homeTown;
     @Column(name = "phone_number", nullable = false)
-
     private int phoneNumber;
     @Column(name = "ingame_name", nullable = false)
-
     private String ingameName;
     @Column(name = "role", nullable = false)
-
     private String role;
 }
