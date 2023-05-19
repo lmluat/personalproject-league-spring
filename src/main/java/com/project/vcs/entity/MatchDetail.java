@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "coach")
+@Table(name = "match_detail")
 public class MatchDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
