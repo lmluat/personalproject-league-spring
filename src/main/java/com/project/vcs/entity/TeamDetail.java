@@ -5,27 +5,26 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+
 @Entity
+//@NamedQuery(name = "Airplane.findByModel", query =" select a from Airplane a where a.model = ?1")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "match_schedule")
-public class MatchSchedule {
+@Table(name = "team")
+public class TeamDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     @JoinColumn(name = "tournament_id", nullable = false)
     private Tournament tournament;
-    @Column(name = "week", nullable = false)
-    private int week;
-    @Column(name = "time", nullable = false)
-    private LocalDate time;
     @ManyToOne
-    @JoinColumn(name = "team_one", nullable = false)
-    private Team teamOne;
+    @JoinColumn(name = "team_id", nullable = false)
+    private Team team;
     @ManyToOne
-    @JoinColumn(name = "team_two", nullable = false)
-    private Team teamTwo;
+    @JoinColumn(name = "coach_id", nullable = false)
+    private Coach coach;
+    @Column(name = "sponsor", nullable = false)
+    private String sponsor;
 }

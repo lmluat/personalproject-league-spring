@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 //@NamedQuery(name = "Airplane.findByModel", query =" select a from Airplane a where a.model = ?1")
@@ -12,21 +13,19 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "team")
-public class TeamHistory {
+public class Match {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "date", nullable = false)
+    private LocalDate date;
+    @Column(name = "location", nullable = false)
+    private String location;
+    @ManyToOne
+    @JoinColumn(name = "caster_id", nullable = false)
+    private Caster caster;
     @ManyToOne
     @JoinColumn(name = "tournament", nullable = false)
     private Tournament tournament;
-    @ManyToOne
-    @JoinColumn(name = "team", nullable = false)
-    private Team team;
-    @Column(name = "captain", nullable = false)
-    private Player captain;
-    @ManyToOne
-    @JoinColumn(name = "coach", nullable = false)
-    private Coach coach;
-    @Column(name = "sponsor", nullable = false)
-    private String sponsor;
+
 }

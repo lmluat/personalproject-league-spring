@@ -30,6 +30,4 @@ public class Player {
     private int phoneNumber;
     @Column(name = "ingame_name", nullable = false)
     private String ingameName;
-    @Column(name = "role", nullable = false)
-    private String role;
 }

@@ -25,7 +25,5 @@ public class Caster {
     private LocalDate dob;
     @Column(name = "hometown")
     private String hometown;
-    @Column(name = "role", nullable = false)
-    private String role;
 
 }

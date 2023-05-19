@@ -16,15 +16,21 @@ public class MatchDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "match_schedule", nullable = false)
-    private MatchSchedule matchSchedule;
     @ManyToOne
-    @JoinColumn(name = "winning_team", nullable = false)
-    private Team team;
+    @JoinColumn(name = "match_id", nullable = false)
+    private Match match;
+    @Column(name ="game_id", nullable = false)
+    private int gameId;
     @ManyToOne
-    @JoinColumn(name = "mvp_player", nullable = false)
-    private Player MVPPlayer;
+    @JoinColumn(name ="team_one", nullable = false)
+    private Team teamOne;
     @ManyToOne
-    @JoinColumn(name = "caster", nullable = false)
-    private Caster caster;
+    @JoinColumn(name ="team_two", nullable = false)
+    private Team teamTwo;
+    @ManyToOne
+    @JoinColumn(name ="winning_team", nullable = false)
+    private Team winningTeam;
+    @ManyToOne
+    @JoinColumn(name ="mvp_player", nullable = false)
+    private Player mostValuablePlayer;
 }
