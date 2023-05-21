@@ -11,6 +11,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PlayService {
     private final PlayRepository playRepository;
-
+    public List<Play> getAllPlay(){
+        return playRepository.findAll();
+    }
 
 }
