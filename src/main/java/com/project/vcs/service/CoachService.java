@@ -16,7 +16,14 @@ public class CoachService {
         return coachRepository.findAll();
     }
     public Coach createCoach(CoachDTO coachDTO){
-        Coach coach = new Coach(coachDTO);
+        Coach coach = Coach.builder()
+                .lastName(coachDTO.getLastName())
+                .middleName(coachDTO.getMiddleName())
+                .firstName(coachDTO.getFirstName())
+                .dob(coachDTO.getDob())
+                .hometown(coachDTO.getHometown())
+                .ingameName(coachDTO.getIngameName())
+                .build();
         return coachRepository.save(coach);
     }
 }

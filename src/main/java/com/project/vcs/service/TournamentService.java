@@ -19,7 +19,13 @@ public class TournamentService {
         return tournamentRepository.findAll();
     }
     public Tournament createTournament(TournamentDTO tournamentDTO){
-       Tournament tournament = new Tournament(tournamentDTO);
+       Tournament tournament = Tournament.builder()
+               .tournamentName(tournamentDTO.getTournamentName())
+               .year(tournamentDTO.getYear())
+               .startDate(tournamentDTO.getStartDate())
+               .endDate(tournamentDTO.getEndDate())
+               .sponsor(tournamentDTO.getSponsor())
+               .build();
 
        return tournamentRepository.save(tournament);
     }

@@ -9,4 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MatchDetailDTO {
     private int gameId;
+    private String teamOne;
+    private String teamTwo;
+    private String winningTeam;
+    private String mostValuablePlayer;
 }

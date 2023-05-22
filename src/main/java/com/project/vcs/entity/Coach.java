@@ -2,12 +2,14 @@ package com.project.vcs.entity;
 
 import com.project.vcs.dto.CoachDTO;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 @Entity
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,12 +30,4 @@ public class Coach {
     private String hometown;
     @Column(name = "ingame_name")
     private String ingameName;
-    public Coach(CoachDTO coachDTO){
-        this.lastName = coachDTO.getLastName();
-        this.middleName = coachDTO.getMiddleName();
-        this.firstName = coachDTO.getFirstName();
-        this.dob = coachDTO.getDob();
-        this.hometown = coachDTO.getHometown();
-        this.ingameName = coachDTO.getIngameName();
-    }
 }

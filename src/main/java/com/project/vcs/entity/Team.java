@@ -2,6 +2,7 @@ package com.project.vcs.entity;
 
 import com.project.vcs.dto.TeamDTO;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "team", uniqueConstraints = {@UniqueConstraint(columnNames = {"team_name"})})
@@ -20,8 +22,5 @@ public class Team {
     private String teamName;
     @Column(name = "location", nullable = false)
     private String location;
-    public Team(TeamDTO teamDTO){
-        this.teamName = teamDTO.getTeamName();
-        this.location = teamDTO.getLocation();
-    }
+
 }
