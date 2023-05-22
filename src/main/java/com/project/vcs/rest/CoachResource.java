@@ -1,5 +1,6 @@
 package com.project.vcs.rest;
 
+import com.project.vcs.dto.CoachDTO;
 import com.project.vcs.entity.Coach;
 import com.project.vcs.service.CoachService;
 import lombok.RequiredArgsConstructor;
@@ -16,5 +17,10 @@ public class CoachResource implements CoachAPI{
     @Override
     public ResponseEntity<List<Coach>> getAllCoach() {
         return ResponseEntity.ok(coachService.getAllCoach());
+    }
+
+    @Override
+    public ResponseEntity<Coach> createCoach(CoachDTO coachDTO) {
+        return ResponseEntity.ok(coachService.createCoach(coachDTO));
     }
 }

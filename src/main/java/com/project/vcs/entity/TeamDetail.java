@@ -1,5 +1,7 @@
 package com.project.vcs.entity;
 
+import com.project.vcs.dto.TeamDetailDTO;
+import com.project.vcs.service.TeamDetailService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,7 +9,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-//@NamedQuery(name = "Airplane.findByModel", query =" select a from Airplane a where a.model = ?1")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

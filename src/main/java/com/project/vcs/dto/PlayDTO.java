@@ -12,6 +12,6 @@ import javax.persistence.Column;
 public class PlayDTO {
 
     private String position;
-
+    private String teamName;
     private Boolean isCaptain;
 }

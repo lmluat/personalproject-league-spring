@@ -15,7 +15,7 @@ public class TournamentDTO {
 
     private String tournamentName;
 
-    private Year year;
+    private String year;
 
     private LocalDate startDate;
 
@@ -24,4 +24,5 @@ public class TournamentDTO {
     private String season;
 
     private String sponsor;
+
 }

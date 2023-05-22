@@ -1,5 +1,6 @@
 package com.project.vcs.rest;
 
+import com.project.vcs.dto.PlayerDTO;
 import com.project.vcs.entity.Player;
 import com.project.vcs.service.PlayerService;
 import lombok.RequiredArgsConstructor;
@@ -16,5 +17,16 @@ public class PlayerResource implements PlayerAPI{
     @Override
     public ResponseEntity<List<Player>> getAllPlayer() {
         return ResponseEntity.ok(playerService.getAllPlayer());
+    }
+
+    @Override
+    public ResponseEntity<Player> createPlayer(PlayerDTO playerDTO) {
+        return ResponseEntity.ok(playerService.createPlayer(playerDTO));
+    }
+
+    @Override
+    public ResponseEntity<Void> deletePlayer(Long id) {
+        playerService.deletePlayer(id);
+        return ResponseEntity.noContent().build();
     }
 }

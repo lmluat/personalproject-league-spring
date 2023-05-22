@@ -9,6 +9,6 @@ import java.util.List;
 
 @RequestMapping(value = "/api")
 public interface CasterAPI {
-    @GetMapping("/caster")
+    @GetMapping("/casters")
     ResponseEntity<List<Caster>> getAllCaster();
 }

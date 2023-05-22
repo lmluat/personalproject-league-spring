@@ -9,6 +9,6 @@ import java.util.List;
 
 @RequestMapping(value = "/api")
 public interface PlayAPI {
-    @GetMapping("/play")
+    @GetMapping("/plays")
     ResponseEntity<List<Play>> getAllPlay();
 }

@@ -9,6 +9,6 @@ import java.util.List;
 
 @RequestMapping(value = "/api")
 public interface MatchDetailAPI {
-    @GetMapping("/matchdetail")
+    @GetMapping("/matchdetails")
     ResponseEntity<List<MatchDetail>> getAllMatchDetail();
 }

@@ -10,6 +10,6 @@ import java.util.List;
 
 @RequestMapping(value = "/api")
 public interface MatchAPI {
-    @GetMapping("/match")
+    @GetMapping("/matchs")
     ResponseEntity<List<Match>> getAllMatch();
 }

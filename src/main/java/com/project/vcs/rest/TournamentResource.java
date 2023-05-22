@@ -1,5 +1,6 @@
 package com.project.vcs.rest;
 
+import com.project.vcs.dto.TournamentDTO;
 import com.project.vcs.entity.Tournament;
 import com.project.vcs.service.TournamentService;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,18 @@ public class TournamentResource implements TournamentAPI{
     private final TournamentService tournamentService;
 
     @Override
-    public ResponseEntity<List<Tournament>> getAllDepartment() {
+    public ResponseEntity<List<Tournament>> getAllTournament() {
         return ResponseEntity.ok(tournamentService.getAllTournament());
+    }
+
+    @Override
+    public ResponseEntity<Tournament> createTournament(TournamentDTO tournamentDTO) {
+        return ResponseEntity.ok(tournamentService.createTournament(tournamentDTO));
+    }
+
+    @Override
+    public ResponseEntity<Void> deleteById(Long id) {
+        tournamentService.deleteTournament(id);
+        return ResponseEntity.noContent().build();
     }
 }

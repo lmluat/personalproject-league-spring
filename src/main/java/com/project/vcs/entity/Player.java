@@ -1,5 +1,6 @@
 package com.project.vcs.entity;
 
+import com.project.vcs.dto.PlayerDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "player")
+@Table(name = "player", uniqueConstraints = {@UniqueConstraint(columnNames = {"ingame_name"})})
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,12 +22,21 @@ public class Player {
     private String middleName;
     @Column(name = "first_name", nullable = false)
     private String firstName;
-    @Column(name = "date_of_birth", nullable = false)
+    @Column(name = "date_of_birth")
     private LocalDate dob;
     @Column(name = "hometown", nullable = false)
     private String homeTown;
     @Column(name = "phone_number", nullable = false)
-    private int phoneNumber;
+    private String phoneNumber;
     @Column(name = "ingame_name", nullable = false)
     private String ingameName;
+    public Player(PlayerDTO playerDTO){
+        this.dob = playerDTO.getDob();
+        this.firstName = playerDTO.getFirstName();
+        this.middleName = playerDTO.getMiddleName();
+        this.lastName = playerDTO.getLastName();
+        this.homeTown = playerDTO.getHometown();
+        this.phoneNumber = playerDTO.getPhoneNumber();
+        this.ingameName = playerDTO.getIngameName();
+    }
 }

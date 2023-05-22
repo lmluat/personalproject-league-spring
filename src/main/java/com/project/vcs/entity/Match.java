@@ -8,7 +8,6 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-//@NamedQuery(name = "Airplane.findByModel", query =" select a from Airplane a where a.model = ?1")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

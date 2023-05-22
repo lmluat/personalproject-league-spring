@@ -9,4 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TeamDetailDTO {
     private String sponsor;
+    private String ingameNameCoach;
+    private String teamName;
 }

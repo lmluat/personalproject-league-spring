@@ -20,9 +20,9 @@ public class PlayerDTO {
 
     private LocalDate dob;
 
-    private String homeTown;
+    private String hometown;
 
-    private int phoneNumber;
+    private String phoneNumber;
 
     private String ingameName;
 }

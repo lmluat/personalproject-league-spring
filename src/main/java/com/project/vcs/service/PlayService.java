@@ -14,5 +14,4 @@ public class PlayService {
     public List<Play> getAllPlay(){
         return playRepository.findAll();
     }
-
 }
