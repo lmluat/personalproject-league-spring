@@ -2,13 +2,9 @@ package com.project.vcs.authenticate.impl;
 
 import com.project.vcs.authenticate.AuthController;
 import com.project.vcs.security.jwt.JwtRequest;
-import com.project.vcs.security.jwt.JwtResponse;
-import com.project.vcs.security.jwt.JwtUtils;
 import com.project.vcs.security.service.dto.UserDTO;
-import com.project.vcs.security.service.impl.UserDetailsImpl;
 import com.project.vcs.security.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
