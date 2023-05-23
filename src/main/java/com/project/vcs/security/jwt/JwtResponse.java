@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Data
-public class JwtResponse implements Serializable {
+public class JwtResponse implements Serializable  {
     private String token;
     private String type = "Bearer";
     private String username;
