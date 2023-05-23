@@ -13,7 +13,7 @@ import javax.validation.Valid;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/auth")
 public interface AuthController {
-    @PostMapping("/signin")
+    @PostMapping("/login")
     ResponseEntity<?> authenticateUser(@Valid @RequestBody JwtRequest loginRequest);
     @PostMapping("/signup")
     ResponseEntity<?> registerUser(@Valid @RequestBody UserDTO userDTO );
