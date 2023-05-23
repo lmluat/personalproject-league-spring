@@ -2,6 +2,7 @@ package com.project.vcs.authenticate;
 
 import com.project.vcs.security.jwt.JwtRequest;
 import com.project.vcs.security.service.dto.UserDTO;
+import com.project.vcs.security.service.dto.custom.UserCustomDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,5 +17,5 @@ public interface AuthController {
     @PostMapping("/signin")
     ResponseEntity<?> authenticateUser(@Valid @RequestBody JwtRequest loginRequest);
     @PostMapping("/signup")
-    ResponseEntity<?> registerUser(@Valid @RequestBody UserDTO userDTO );
+    ResponseEntity<UserCustomDTO> registerUser(@Valid @RequestBody UserDTO userDTO );
 }

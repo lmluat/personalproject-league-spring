@@ -1,10 +1,12 @@
 package com.project.vcs.authenticate.impl;
 
 import com.project.vcs.authenticate.AuthController;
+import com.project.vcs.security.entity.User;
 import com.project.vcs.security.jwt.JwtRequest;
 import com.project.vcs.security.jwt.JwtResponse;
 import com.project.vcs.security.jwt.JwtUtils;
 import com.project.vcs.security.service.dto.UserDTO;
+import com.project.vcs.security.service.dto.custom.UserCustomDTO;
 import com.project.vcs.security.service.impl.UserDetailsImpl;
 import com.project.vcs.security.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +26,7 @@ public class AuthControllerImpl implements AuthController {
     }
 
     @Override
-    public ResponseEntity<?> registerUser(UserDTO userDTO) {
+    public ResponseEntity<UserCustomDTO> registerUser(UserDTO userDTO) {
         return ResponseEntity.ok(userServiceImpl.registerUser(userDTO));
     }
 }
