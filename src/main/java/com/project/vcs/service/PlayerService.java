@@ -16,7 +16,14 @@ public class PlayerService {
         return playerRepository.findAll();
     }
     public Player createPlayer(PlayerDTO playerDTO){
-        Player player = new Player(playerDTO);
+        Player player = Player.builder()
+                .firstName(playerDTO.getFirstName())
+                .middleName(playerDTO.getMiddleName())
+                .lastName(playerDTO.getLastName())
+                .dob(playerDTO.getDob())
+                .phoneNumber(playerDTO.getPhoneNumber())
+                .homeTown(playerDTO.getHometown())
+                .build();
         return playerRepository.save(player);
     }
     public void deletePlayer(Long id){

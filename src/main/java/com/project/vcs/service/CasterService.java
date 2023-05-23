@@ -12,12 +12,10 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class CasterService {
     private final CasterRepository casterRepository;
-    private final CasterMapper casterMapper;
     public List<CasterDTO> getAllCaster(){
-        return casterMapper.INSTANCE.toDTOs(casterRepository.findAll());
+        return CasterMapper.INSTANCE.toDTOs(casterRepository.findAll());
     }
     public Caster createCaster(CasterDTO casterDTO){
         Caster caster = Caster.builder()

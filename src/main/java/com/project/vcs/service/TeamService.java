@@ -16,7 +16,10 @@ public class TeamService {
         return teamRepository.findAll();
     }
     public Team createTeam(TeamDTO teamDTO){
-        Team team = new Team(teamDTO);
+        Team team = Team.builder()
+                .teamName(teamDTO.getTeamName())
+                .location(teamDTO.getLocation())
+                .build();
         return teamRepository.save(team);
     }
     public Team findByTeamName(String name){
