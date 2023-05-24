@@ -58,7 +58,7 @@ public class MatchDetailService {
                 .collect(Collectors.toList());
 
         for (TeamDetail detail : teamDetailList) {
-            if (detail.getId()==teamId) {
+            if (detail.getTeam().getId()==teamId) {
                 teamDetail = detail;
             }
         }
