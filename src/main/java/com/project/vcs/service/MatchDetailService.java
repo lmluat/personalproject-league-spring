@@ -25,6 +25,12 @@ public class MatchDetailService {
 
         Player player = playerRepository.findByIngameName(matchDetailDTO.getMostValuablePlayer());
 
+        Team teamOne, teamTwo = new Team();
+
+//        if(!matchDetailDTO.getTeamOne().equals(matchDetailDTO.getTeamTwo())){
+//            teamOne =
+//        }
+
 
     }
 }

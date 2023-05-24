@@ -1,7 +1,6 @@
 package com.project.vcs.service.mapper;
 
 import com.project.vcs.dto.PlayerDTO;
-import com.project.vcs.entity.Play;
 import com.project.vcs.entity.Player;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;

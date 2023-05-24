@@ -40,6 +40,7 @@ public class UserServiceImpl implements UserService {
         User user = new User(userDTO.getUsername(), encoder.encode(userDTO.getPassword()));
 
         List<UserRoleAssignment> userRoleAssignmentList = new ArrayList<>();
+        user.setRoleList(userDTO.getRoleList());
 
         userDTO.getRoleList().forEach(u -> {
             UserRoleAssignment userRoleAssignment = new UserRoleAssignment();

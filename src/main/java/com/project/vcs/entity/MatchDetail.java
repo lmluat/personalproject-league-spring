@@ -23,13 +23,13 @@ public class MatchDetail {
     private int gameId;
     @ManyToOne
     @JoinColumn(name ="team_one", nullable = false)
-    private Team teamOne;
+    private TeamDetail teamOne;
     @ManyToOne
     @JoinColumn(name ="team_two", nullable = false)
-    private Team teamTwo;
+    private TeamDetail teamTwo;
     @ManyToOne
     @JoinColumn(name ="winning_team", nullable = false)
-    private Team winningTeam;
+    private TeamDetail winningTeam;
     @ManyToOne
     @JoinColumn(name ="mvp_player", nullable = false)
     private Player mostValuablePlayer;
