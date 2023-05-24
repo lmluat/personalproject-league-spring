@@ -12,13 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@Slf4j
 @RequiredArgsConstructor
 public class CasterResoure implements CasterAPI{
     private final CasterService casterService;
 
     @Override
-    @PreAuthorize("hasAnyRole('USER')")
     public ResponseEntity<List<CasterDTO>> getAllCaster() {
         return ResponseEntity.ok(casterService.getAllCaster());
     }

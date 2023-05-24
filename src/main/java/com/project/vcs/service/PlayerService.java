@@ -23,6 +23,7 @@ public class PlayerService {
                 .dob(playerDTO.getDob())
                 .phoneNumber(playerDTO.getPhoneNumber())
                 .homeTown(playerDTO.getHometown())
+                .ingameName(playerDTO.getIngameName())
                 .build();
         return playerRepository.save(player);
     }
