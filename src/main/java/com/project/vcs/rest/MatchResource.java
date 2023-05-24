@@ -1,5 +1,6 @@
 package com.project.vcs.rest;
 
+import com.project.vcs.dto.MatchDTO;
 import com.project.vcs.entity.Match;
 import com.project.vcs.repository.MatchRepository;
 import com.project.vcs.service.MatchService;
@@ -17,5 +18,10 @@ public class MatchResource implements MatchAPI {
     @Override
     public ResponseEntity<List<Match>> getAllMatch() {
         return ResponseEntity.ok(matchService.getAllMatch());
+    }
+
+    @Override
+    public ResponseEntity<Match> createMatch(Long tournamentId, Long casterId, MatchDTO matchDTO) {
+        return ResponseEntity.ok(matchService.createMatch(matchDTO, tournamentId, casterId));
     }
 }

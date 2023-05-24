@@ -36,6 +36,7 @@ public class TeamDetailService {
         teamDetail.setTeam(team);
         teamDetail.setCoach(coach);
         teamDetail.setSponsor(sponsor);
+
         if(tournament.isPresent()){
             teamDetail.setTournament(tournament.get());
         }

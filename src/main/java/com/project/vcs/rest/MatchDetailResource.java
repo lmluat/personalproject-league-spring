@@ -1,5 +1,6 @@
 package com.project.vcs.rest;
 
+import com.project.vcs.dto.MatchDetailDTO;
 import com.project.vcs.entity.MatchDetail;
 import com.project.vcs.service.MatchDetailService;
 import lombok.RequiredArgsConstructor;
@@ -15,5 +16,10 @@ public class MatchDetailResource implements MatchDetailAPI{
     @Override
     public ResponseEntity<List<MatchDetail>> getAllMatchDetail() {
         return ResponseEntity.ok(matchDetailService.getAllMatchDetail());
+    }
+
+    @Override
+    public ResponseEntity<MatchDetail> createMatchDetail(Long id, MatchDetailDTO matchDetailDTO) {
+        return ResponseEntity.ok(matchDetailService.createMatchDetail(matchDetailDTO, id));
     }
 }

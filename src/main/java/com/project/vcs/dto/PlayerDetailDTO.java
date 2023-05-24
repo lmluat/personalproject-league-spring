@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 public class PlayerDetailDTO {
 
     private String position;
-    private String teamName;
+    private String ingameName;
     private Boolean isCaptain;
 }
