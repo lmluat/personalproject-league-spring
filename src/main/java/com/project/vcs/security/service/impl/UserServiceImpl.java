@@ -8,7 +8,6 @@ import com.project.vcs.security.jwt.JwtUtils;
 import com.project.vcs.security.repository.UserRepository;
 import com.project.vcs.security.service.UserService;
 import com.project.vcs.security.service.dto.UserDTO;
-import com.project.vcs.security.service.dto.custom.UserCustomDTO;
 import com.project.vcs.security.service.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +36,7 @@ public class UserServiceImpl implements UserService {
     public List<UserDTO> getUsers() {
         return UserMapper.INSTANCE.mapToDtos(userRepository.findAll());
     }
-    public UserCustomDTO registerUser(UserDTO userDTO) {
+    public ResponseEntity<?> registerUser(UserDTO userDTO) {
         User user = new User(userDTO.getUsername(), encoder.encode(userDTO.getPassword()));
 
         List<UserRoleAssignment> userRoleAssignmentList = new ArrayList<>();
@@ -55,12 +54,7 @@ public class UserServiceImpl implements UserService {
         user.setRoles(userRoleAssignmentList);
         userRepository.save(user);
 
-        return UserMapper.INSTANCE.mapToCustomDTO(user);
-
-//        return new UserCustomDTO().builder()
-//                .username(userDTO.getUsername())
-//                .roleList(userDTO.getRoleList())
-//                .build();
+        return ResponseEntity.ok("User registered successfully!");
     }
     public ResponseEntity<?> authenticateUser(JwtRequest loginRequest) {
 
