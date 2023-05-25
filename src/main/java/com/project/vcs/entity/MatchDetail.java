@@ -27,7 +27,7 @@ public class MatchDetail {
     @ManyToOne
     @JoinColumn(name ="team_two", nullable = false)
     private TeamDetail teamTwo;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name ="winning_team", nullable = false)
     private TeamDetail winningTeam;
     @ManyToOne
