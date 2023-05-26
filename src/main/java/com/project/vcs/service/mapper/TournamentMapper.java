@@ -10,9 +10,9 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring")
 public interface TournamentMapper {
     TournamentMapper INSTANCE = Mappers.getMapper(TournamentMapper.class);
     TournamentDTO toDTO(Tournament tournament);
-    List<TournamentDTO> toDTOs(List<TournamentDTO> tournamentDTOS);
+    List<TournamentDTO> toDTOs(List<Tournament> tournaments);
 }

@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping(value = "/api/tournaments")
 public interface TournamentAPI {
     @GetMapping
-    ResponseEntity<List<Tournament>> getAllTournament();
+    ResponseEntity<List<TournamentDTO>> getAllTournament();
     @PostMapping("/id")
     ResponseEntity<Tournament> createTournament(@RequestBody TournamentDTO tournamentDTO);
     @DeleteMapping("/{id}")

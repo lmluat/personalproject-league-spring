@@ -2,6 +2,7 @@ package com.project.vcs.service;
 
 import com.project.vcs.dto.MatchDetailDTO;
 import com.project.vcs.entity.*;
+import com.project.vcs.exception.DemoException;
 import com.project.vcs.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,8 +28,11 @@ public class MatchDetailService {
     }
     public MatchDetail createMatchDetail(MatchDetailDTO matchDetailDTO, Long matchId) {
 
-        Tournament tournament = matchRepository.findById(matchId).get().getTournament();
+        Tournament tournament = matchRepository.findById(matchId).orElseThrow(DemoException::TournamentNotFound).getTournament();
         Player player = playerRepository.findByingameName(matchDetailDTO.getMostValuablePlayer());
+        if(player == null){
+            throw DemoException.PlayerNotFound();
+        }
 
         String winningTeam = null;
 

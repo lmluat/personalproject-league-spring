@@ -3,6 +3,7 @@ package com.project.vcs.service;
 import com.project.vcs.dto.TournamentDTO;
 import com.project.vcs.entity.Tournament;
 import com.project.vcs.repository.TournamentRepository;
+import com.project.vcs.service.mapper.TournamentMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,8 +16,8 @@ import java.util.stream.Collectors;
 public class TournamentService {
     private final TournamentRepository tournamentRepository;
 
-    public List<Tournament> getAllTournament(){
-        return tournamentRepository.findAll();
+    public List<TournamentDTO> getAllTournament(){
+        return TournamentMapper.INSTANCE.toDTOs(tournamentRepository.findAll());
     }
     public Tournament createTournament(TournamentDTO tournamentDTO){
        Tournament tournament = Tournament.builder()

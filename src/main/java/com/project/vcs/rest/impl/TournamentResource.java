@@ -16,7 +16,7 @@ public class TournamentResource implements TournamentAPI {
     private final TournamentService tournamentService;
 
     @Override
-    public ResponseEntity<List<Tournament>> getAllTournament() {
+    public ResponseEntity<List<TournamentDTO>> getAllTournament() {
         return ResponseEntity.ok(tournamentService.getAllTournament());
     }
 
