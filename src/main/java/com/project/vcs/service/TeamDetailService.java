@@ -2,6 +2,7 @@ package com.project.vcs.service;
 
 import com.project.vcs.dto.TeamDetailDTO;
 //import com.project.vcs.dto.custom.TeamDetailCustomDTO;
+import com.project.vcs.dto.custom.TeamDetailCustomDTO;
 import com.project.vcs.entity.Coach;
 import com.project.vcs.entity.Team;
 import com.project.vcs.entity.TeamDetail;
@@ -24,9 +25,9 @@ public class TeamDetailService {
     private final TeamRepository teamRepository;
     private final CoachRepository coachRepository;
     private final TournamentRepository tournamentRepository;
-//    public List<TeamDetailCustomDTO> getAllTeamDetail(){
-//        return TeamDetailMapper.INSTANCE.toDTOs(teamDetailRepository.findAll());
-//    }
+    public List<TeamDetailCustomDTO> getAllTeamDetail(){
+        return TeamDetailMapper.INSTANCE.toCustomDTOs(teamDetailRepository.findAll());
+    }
     public TeamDetail createTeamDetail(Long id, TeamDetailDTO teamDetailDTO){
         Team team = teamRepository.findByTeamName(teamDetailDTO.getTeamName());
         Coach coach = coachRepository.findByIngameName(teamDetailDTO.getIngameNameCoach());

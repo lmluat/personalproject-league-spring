@@ -28,7 +28,7 @@ public class MatchService {
     private final TeamDetailRepository teamDetailRepository;
     private final MatchDetailRepository matchDetailRepository;
 
-        public List<MatchDTO> getAllMatch(){
+    public List<MatchDTO> getAllMatch(){
         return MatchMapper.INSTANCE.toDTOs(matchRepository.findAll());
     }
     public MatchScheduleDTO createMatch(MatchScheduleDTO matchScheduleDTO, Long tournamentId, Long casterId) {
@@ -50,7 +50,6 @@ public class MatchService {
                 .build();
 
         MatchDetail matchDetail = new MatchDetail(match, gameId, teamOneDetail, teamTwoDetail);
-//        matchDetailRepository.save(matchDetail);
         List<MatchDetail> matchDetailList = new ArrayList<>();
         matchDetailList.add(matchDetail);
 

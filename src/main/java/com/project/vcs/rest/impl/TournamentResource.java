@@ -1,7 +1,8 @@
-package com.project.vcs.rest;
+package com.project.vcs.rest.impl;
 
 import com.project.vcs.dto.TournamentDTO;
 import com.project.vcs.entity.Tournament;
+import com.project.vcs.rest.TournamentAPI;
 import com.project.vcs.service.TournamentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class TournamentResource implements TournamentAPI{
+public class TournamentResource implements TournamentAPI {
     private final TournamentService tournamentService;
 
     @Override

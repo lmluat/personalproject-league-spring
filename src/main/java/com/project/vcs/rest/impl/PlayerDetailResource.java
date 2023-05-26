@@ -1,7 +1,8 @@
-package com.project.vcs.rest;
+package com.project.vcs.rest.impl;
 
 import com.project.vcs.dto.PlayerDetailDTO;
 import com.project.vcs.entity.PlayerDetail;
+import com.project.vcs.rest.PlayerDetailAPI;
 import com.project.vcs.service.PlayerDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

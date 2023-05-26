@@ -1,7 +1,8 @@
-package com.project.vcs.rest;
+package com.project.vcs.rest.impl;
 
 import com.project.vcs.dto.CasterDTO;
 import com.project.vcs.entity.Caster;
+import com.project.vcs.rest.CasterAPI;
 import com.project.vcs.service.CasterService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class CasterResoure implements CasterAPI{
+public class CasterResoure implements CasterAPI {
     private final CasterService casterService;
 
     @Override

@@ -1,7 +1,8 @@
-package com.project.vcs.rest;
+package com.project.vcs.rest.impl;
 
 import com.project.vcs.dto.TeamDTO;
 import com.project.vcs.entity.Team;
+import com.project.vcs.rest.TeamAPI;
 import com.project.vcs.service.TeamService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

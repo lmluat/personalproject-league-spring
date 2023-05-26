@@ -1,7 +1,8 @@
-package com.project.vcs.rest;
+package com.project.vcs.rest.impl;
 
 import com.project.vcs.dto.PlayerDTO;
 import com.project.vcs.entity.Player;
+import com.project.vcs.rest.PlayerAPI;
 import com.project.vcs.service.PlayerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class PlayerResource implements PlayerAPI{
+public class PlayerResource implements PlayerAPI {
     private final PlayerService playerService;
 
     @Override
