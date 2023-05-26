@@ -1,5 +1,6 @@
 package com.project.vcs.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -28,5 +31,8 @@ public class Match {
     @ManyToOne
     @JoinColumn(name = "tournament", nullable = false)
     private Tournament tournament;
+    @JsonIgnore
+    @OneToMany(mappedBy = "match", cascade = CascadeType.ALL)
+    private List<MatchDetail> matchDetailList = new ArrayList<>();
 
 }

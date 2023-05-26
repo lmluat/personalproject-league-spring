@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,15 +23,22 @@ public class MatchDetail {
     @Column(name ="game_id", nullable = false)
     private int gameId;
     @ManyToOne
-    @JoinColumn(name ="team_one", nullable = false)
-    private Team teamOne;
+    @JoinColumn(name ="team_one",nullable = false)
+    private TeamDetail teamOne;
     @ManyToOne
-    @JoinColumn(name ="team_two", nullable = false)
-    private Team teamTwo;
+    @JoinColumn(name ="team_two",nullable = false)
+    private TeamDetail teamTwo;
+    @Column(name ="winning_Team")
+    private String winningTeam;
     @ManyToOne
-    @JoinColumn(name ="winning_team", nullable = false)
-    private Team winningTeam;
-    @ManyToOne
-    @JoinColumn(name ="mvp_player", nullable = false)
-    private Player mostValuablePlayer;
+    @JoinColumn(name ="mvp_player")
+    private PlayerDetail mostValuablePlayer;
+
+
+    public MatchDetail(Match match, int gameId, TeamDetail teamOne, TeamDetail teamTwo) {
+        this.match = match;
+        this.gameId = gameId;
+        this.teamOne = teamOne;
+        this.teamTwo = teamTwo;
+    }
 }

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.http.HttpResponse;
 import java.util.List;
-
 @RequestMapping(value = "/api/tournaments")
 public interface TournamentAPI {
     @GetMapping

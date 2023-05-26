@@ -1,6 +1,7 @@
 package com.project.vcs.rest;
 
 import com.project.vcs.dto.TeamDetailDTO;
+//import com.project.vcs.dto.custom.TeamDetailCustomDTO;
 import com.project.vcs.entity.TeamDetail;
 import com.project.vcs.service.TeamDetailService;
 import lombok.RequiredArgsConstructor;
@@ -13,10 +14,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TeamDetailResource implements TeamDetailAPI{
     private final TeamDetailService teamDetailService;
-    @Override
-    public ResponseEntity<List<TeamDetail>> getAllTeamDetail() {
-        return ResponseEntity.ok(teamDetailService.getAllTeamDetail());
-    }
+//    @Override
+//    public ResponseEntity<List<TeamDetailCustomDTO>> getAllTeamDetail() {
+//        return ResponseEntity.ok(teamDetailService.getAllTeamDetail());
+//    }
 
     @Override
     public ResponseEntity<TeamDetail> createTeamDetail(Long id,TeamDetailDTO teamDetailDTO) {

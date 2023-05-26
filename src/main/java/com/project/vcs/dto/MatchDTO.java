@@ -15,12 +15,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MatchDTO {
-
+    private String tournamentName;
+    private String casterName;
     private LocalDate date;
-
     private String location;
 
-    private Caster caster;
-
-    private Tournament tournament;
 }

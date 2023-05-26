@@ -4,14 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PlayDTO {
+public class PlayerDetailDTO {
 
     private String position;
-    private String teamName;
+    private String firstName;
+    private String ingameName;
     private Boolean isCaptain;
+    private String teamName;
+    private String tournamentName;
 }

@@ -28,6 +28,6 @@ public class TeamDetail {
     @ManyToOne
     @JoinColumn(name = "coach_id", nullable = false)
     private Coach coach;
-    @Column(name = "sponsor", nullable = false)
+    @Column(name = "sponsor")
     private String sponsor;
 }

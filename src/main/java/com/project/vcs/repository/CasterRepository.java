@@ -4,6 +4,9 @@ import com.project.vcs.entity.Caster;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface CasterRepository extends JpaRepository<Caster, Long> {
+    public Optional<Caster> findById(Long id);
 }
