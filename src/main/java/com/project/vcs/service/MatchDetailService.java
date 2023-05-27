@@ -20,9 +20,9 @@ public class MatchDetailService {
     private final PlayerRepository playerRepository;
     private final TeamRepository teamRepository;
     private final PlayerDetailService playerDetailService;
-//    public List<MatchDetailCustomDTO> getAllMatchDetail(){
-//        return MatchDetailMapper.INSTANCE.toDTOs(matchDetailRepository.findAll());
-//    }
+    public List<MatchDetailCustomDTO> getAllMatchDetail(){
+        return MatchDetailMapper.INSTANCE.toDTOs(matchDetailRepository.findAll());
+    }
     public MatchDetail findById(Long id){
         return matchDetailRepository.findById(id).get();
     }

@@ -26,4 +26,15 @@ public class CasterResoure implements CasterAPI {
     public ResponseEntity<Caster> createCaster(CasterDTO casterDTO) {
         return ResponseEntity.ok(casterService.createCaster(casterDTO));
     }
+
+    @Override
+    public ResponseEntity<CasterDTO> updateCaster(Long id, CasterDTO casterDTO) {
+        return ResponseEntity.ok(casterService.updateCaster(casterDTO,id));
+    }
+
+    @Override
+    public ResponseEntity<Void> deleteCaster(Long id) {
+        casterService.deleteCaster(id);
+        return ResponseEntity.noContent().build();
+    }
 }

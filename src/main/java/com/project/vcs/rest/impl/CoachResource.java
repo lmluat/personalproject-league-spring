@@ -21,7 +21,12 @@ public class CoachResource implements CoachAPI {
     }
 
     @Override
-    public ResponseEntity<Coach> createCoach(CoachDTO coachDTO) {
+    public ResponseEntity<CoachDTO> createCoach(CoachDTO coachDTO) {
         return ResponseEntity.ok(coachService.createCoach(coachDTO));
+    }
+
+    @Override
+    public ResponseEntity<CoachDTO> updateCoach(Long id, CoachDTO coachDTO) {
+        return ResponseEntity.ok(coachService.updateCoach(coachDTO, id));
     }
 }

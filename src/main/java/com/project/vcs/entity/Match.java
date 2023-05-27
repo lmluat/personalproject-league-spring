@@ -25,9 +25,11 @@ public class Match {
     private LocalDate date;
     @Column(name = "location", nullable = false)
     private String location;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "caster_id", nullable = false)
     private Caster caster;
+
+
     @ManyToOne
     @JoinColumn(name = "tournament", nullable = false)
     private Tournament tournament;

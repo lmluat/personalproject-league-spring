@@ -31,14 +31,27 @@ public class CasterService {
     public CasterDTO updateCaster(CasterDTO casterDTO, Long casterId){
         Caster caster = casterRepository.findById(casterId).orElseThrow(DemoException::CasterNotFound);
 
-        if(casterDTO.getLastName() != null) caster.setLastName(casterDTO.getLastName());
-        if(casterDTO.getMiddleName() != null) caster.setMiddleName(casterDTO.getMiddleName());
-        if(casterDTO.getFirstName() != null) caster.setFirstName(casterDTO.getFirstName());
-        if(casterDTO.getFirstName() != null) caster.setFirstName(casterDTO.getFirstName());
-        if(casterDTO.getDob() != null) caster.setDob(casterDTO.getDob());
-        if(casterDTO.getHometown() != null) caster.setHometown(casterDTO.getHometown());
+        if (casterDTO.getLastName() != null) {
+            caster.setLastName(casterDTO.getLastName());
+        }
+        if (casterDTO.getMiddleName() != null) {
+            caster.setMiddleName(casterDTO.getMiddleName());
+        }
+        if (casterDTO.getFirstName() != null) {
+            caster.setFirstName(casterDTO.getFirstName());
+        }
+        if (casterDTO.getDob() != null) {
+            caster.setDob(casterDTO.getDob());
+        }
+        if (casterDTO.getHometown() != null) {
+            caster.setHometown(casterDTO.getHometown());
+        }
 
         casterRepository.save(caster);
-        return casterDTO;
+        return CasterMapper.INSTANCE.toDTO(caster);
+    }
+    public void deleteCaster(Long casterId){
+        Caster caster = casterRepository.findById(casterId).orElseThrow(DemoException::CasterNotFound);
+        casterRepository.delete(caster);
     }
 }

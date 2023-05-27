@@ -2,7 +2,9 @@ package com.project.vcs.service;
 
 import com.project.vcs.dto.CoachDTO;
 import com.project.vcs.entity.Coach;
+import com.project.vcs.exception.DemoException;
 import com.project.vcs.repository.CoachRepository;
+import com.project.vcs.service.mapper.CoachMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,7 @@ public class CoachService {
     public List<Coach> getAllCoach(){
         return coachRepository.findAll();
     }
-    public Coach createCoach(CoachDTO coachDTO){
+    public CoachDTO createCoach(CoachDTO coachDTO){
         Coach coach = Coach.builder()
                 .lastName(coachDTO.getLastName())
                 .middleName(coachDTO.getMiddleName())
@@ -24,6 +26,34 @@ public class CoachService {
                 .hometown(coachDTO.getHometown())
                 .ingameName(coachDTO.getIngameName())
                 .build();
-        return coachRepository.save(coach);
+        coachRepository.save(coach);
+        return CoachMapper.INSTANCE.toDTO(coach);
     }
+    public CoachDTO updateCoach(CoachDTO coachDTO, Long id){
+        Coach coach = coachRepository.findById(id).orElseThrow(DemoException::CoachNotFound);
+
+        if(coachDTO.getFirstName() != null){
+            coach.setFirstName(coachDTO.getFirstName());
+        }
+        if(coachDTO.getMiddleName() != null){
+            coach.setMiddleName(coachDTO.getMiddleName());
+        }
+        if(coachDTO.getLastName() != null){
+            coach.setLastName(coachDTO.getLastName());
+        }
+        if (coachDTO.getDob() != null) {
+            coach.setDob(coachDTO.getDob());
+        }
+        if (coachDTO.getHometown() != null) {
+            coach.setHometown(coachDTO.getHometown());
+        }
+        if (coachDTO.getIngameName() != null) {
+            coach.setIngameName(coachDTO.getIngameName());
+        }
+
+        coachRepository.save(coach);
+        return CoachMapper.INSTANCE.toDTO(coach);
+
+    }
+
 }
