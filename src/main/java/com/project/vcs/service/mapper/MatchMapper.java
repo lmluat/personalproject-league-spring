@@ -1,6 +1,7 @@
 package com.project.vcs.service.mapper;
 
 import com.project.vcs.dto.MatchDTO;
+import com.project.vcs.dto.custom.MatchUpdateDTO;
 import com.project.vcs.entity.Match;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -19,4 +20,7 @@ public interface MatchMapper {
     MatchDTO toDTO(Match match);
 
     List<MatchDTO> toDTOs(List<Match> matchList);
+    @Mapping(target="location",source="location")
+    @Mapping(target="date",source="date")
+    MatchUpdateDTO toUpdateDTO(Match match);
 }

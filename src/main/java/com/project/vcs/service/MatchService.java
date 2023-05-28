@@ -7,6 +7,7 @@ import com.project.vcs.dto.MatchDTO;
 import com.project.vcs.dto.MatchDetailDTO;
 import com.project.vcs.dto.custom.MatchScheduleDTO;
 import com.project.vcs.entity.*;
+import com.project.vcs.exception.DemoException;
 import com.project.vcs.repository.*;
 //import com.project.vcs.service.mapper.MatchMapper;
 import com.project.vcs.service.mapper.MatchMapper;
@@ -58,8 +59,24 @@ public class MatchService {
         matchRepository.save(match);
         return matchScheduleDTO;
     }
-//    public List<MatchScheduleDTO> showMatchSchedule(LocalDate startDate, LocalDate endDate){
-//
-//    }
+    public MatchDTO updateMatch(MatchDTO matchDTO, Long matchId, Long casterId, Long tournamentId){
+        Match match = matchRepository.findById(matchId).orElseThrow(DemoException::MatchNotFound);
+        Caster caster = casterRepository.findById(casterId).orElseThrow(DemoException::CasterNotFound);
+        Tournament tournament = tournamentRepository.findById(tournamentId).orElseThrow(DemoException::TournamentNotFound);
+
+        if (matchDTO.getDate() != null) {
+            match.setDate(matchDTO.getDate());
+        }
+
+        if (matchDTO.getLocation() != null) {
+            match.setLocation(matchDTO.getLocation());
+        }
+
+
+        if (matchDTO.getTournamentName() != null) {
+            match.setTournament(tournament);
+        }
+
+    }
 
 }
