@@ -22,7 +22,6 @@ public class PlayerDetailService {
     private final PlayerDetailRepository playerDetailRepository;
     private final PlayerRepository playerRepository;
     private final TeamDetailRepository teamDetailRepository;
-    private final PlayerDetailService playerDetailService;
     public List<PlayerDetailDTO> getAllPlayerDetail(){
         return PlayerDetailMapper.INSTANCE.toDTOs(playerDetailRepository.findAll());
     }

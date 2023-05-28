@@ -14,8 +14,8 @@ public interface MatchDetailAPI {
     @PostMapping("/{matchid}")
     ResponseEntity<MatchDetailDTO> createMatchDetail(@PathVariable("matchid") Long id,
                                                   @RequestBody MatchDetailDTO matchDetailDTO);
-//    @PutMapping("/{matchid}/{gameid}")
-//    ResponseEntity<MatchDetailDTO> updateMatchDetail(@PathVariable("matchid") Long matchId,
-//                                                     @PathVariable("gameid") int gameId,
-//                                                     @RequestBody MatchDetailDTO matchDetailDTO);
+    @PutMapping("/{matchid}/{gameid}")
+    ResponseEntity<MatchDetailDTO> updateMatchDetail(@PathVariable("matchid") Long matchId,
+                                                     @PathVariable("gameid") int gameId,
+                                                     @RequestBody MatchDetailDTO matchDetailDTO);
 }

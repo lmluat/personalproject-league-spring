@@ -91,30 +91,36 @@ public class MatchDetailService {
         }
         return teamDetail;
     }
-//    public MatchDetailDTO updateMatchDetail(MatchDetailDTO matchDetailDTO, Long matchId, int gameId){
-//        MatchDetail matchDetail = matchDetailRepository.findByMatchIdAndGameId(matchId, gameId);
-//        if(matchDetail == null){
-//            throw DemoException.MatchDetailNotFound();
-//        }
-//
-//        TeamDetail teamOneDetail = getTeamDetail(matchDetail.getMatch().getTournament(), matchDetailDTO.getTeamOne());
-//        TeamDetail teamTwoDetail = getTeamDetail(matchDetail.getMatch().getTournament(), matchDetailDTO.getTeamTwo());
-//
-//        Player player = playerRepository.findByingameName(matchDetailDTO.getMostValuablePlayer());
-//        if(player == null){
-//            throw DemoException.PlayerNotFound();
-//        }
-//        String winningTeam = null;
-//        if (matchDetailDTO.getWinningTeam().equals(matchDetailDTO.getTeamOne()) || matchDetailDTO.getWinningTeam().equals(matchDetailDTO.getTeamTwo())) {
-//            winningTeam = matchDetailDTO.getWinningTeam();
-//        }
-////        TeamDetail winningTeamDetail = teamDetailService.findByTeamNameAndTournament(matchDetailDTO.getWinningTeam(), tournament);
-////        PlayerDetail mostValuablePlayerDetail = playerDetailService.findByPlayerTeamDetail(player,winningTeam )
-//
-//        matchDetail.setTeamOne(teamOneDetail);
-//        matchDetail.setTeamTwo(teamTwoDetail);
-//        matchDetail.setWinningTeam(matchDetailDTO.getWinningTeam());
-//
-//        return MatchDetailMapper.INSTANCE.toDTO(matchDetail);
-//    }
+    public MatchDetailDTO updateMatchDetail(MatchDetailDTO matchDetailDTO, Long matchId, int gameId){
+        MatchDetail matchDetail = matchDetailRepository.findByMatchIdAndGameId(matchId, gameId);
+        if(matchDetail == null){
+            throw DemoException.MatchDetailNotFound();
+        }
+
+        TeamDetail teamOneDetail = getTeamDetail(matchDetail.getMatch().getTournament(), matchDetailDTO.getTeamOne());
+        TeamDetail teamTwoDetail = getTeamDetail(matchDetail.getMatch().getTournament(), matchDetailDTO.getTeamTwo());
+
+        Player player = playerRepository.findByingameName(matchDetailDTO.getMostValuablePlayer());
+        if(player == null){
+            throw DemoException.PlayerNotFound();
+        }
+        Tournament tournament = matchRepository.findById(matchId).orElseThrow(DemoException::TournamentNotFound).getTournament();
+        TeamDetail winningTeamDetail = teamDetailService.findByTeamNameAndTournament(matchDetailDTO.getWinningTeam(), tournament);
+        List<PlayerDetail> playerDetailListWinningTeam = playerDetailService.findByTeamDetail(winningTeamDetail);
+
+        PlayerDetail mostValuablePlayer = null;
+        for (PlayerDetail detail : playerDetailListWinningTeam) {
+            if (Objects.equals(player.getId(), detail.getPlayer().getId())) {
+                mostValuablePlayer = detail;
+            }
+        }
+
+        matchDetail.setTeamOne(teamOneDetail);
+        matchDetail.setTeamTwo(teamTwoDetail);
+        matchDetail.setWinningTeam(matchDetailDTO.getWinningTeam());
+        matchDetail.setMostValuablePlayer(mostValuablePlayer);
+        matchDetailRepository.save(matchDetail);
+
+        return MatchDetailMapper.INSTANCE.toDTO(matchDetail);
+    }
 }
