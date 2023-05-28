@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 
@@ -21,6 +22,7 @@ public class MatchDetail {
     @JoinColumn(name = "match_id", nullable = false)
     private Match match;
     @Column(name ="game_id", nullable = false)
+    @Range(min = 1, max = 3)
     private int gameId;
     @ManyToOne
     @JoinColumn(name ="team_one",nullable = false)

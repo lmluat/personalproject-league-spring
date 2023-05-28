@@ -7,7 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
@@ -16,6 +15,6 @@ class MatchDetailRepositoryTest {
     MatchDetailRepository matchDetailRepository;
     @Test
     void findByMatchIdAndGameId() {
-        matchDetailRepository.findByMatchIdAndGameId(1L,1);
+        matchDetailRepository.findByMatchId(1L,1);
     }
 }

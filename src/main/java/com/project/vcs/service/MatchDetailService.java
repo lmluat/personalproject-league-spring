@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -92,10 +93,13 @@ public class MatchDetailService {
         return teamDetail;
     }
     public MatchDetailDTO updateMatchDetail(MatchDetailDTO matchDetailDTO, Long matchId, int gameId){
-        MatchDetail matchDetail = matchDetailRepository.findByMatchIdAndGameId(matchId, gameId);
-        if(matchDetail == null){
+        List<MatchDetail> matchDetails = matchDetailRepository.findByMatchId(matchId);
+        if(matchDetails == null){
             throw DemoException.MatchDetailNotFound();
         }
+        MatchDetail matchDetail = matchDetails.stream()
+                .filter(m -> m.getGameId() == gameId)
+                .findFirst().orElseThrow(DemoException::MatchDetailNotFound);
 
         TeamDetail teamOneDetail = getTeamDetail(matchDetail.getMatch().getTournament(), matchDetailDTO.getTeamOne());
         TeamDetail teamTwoDetail = getTeamDetail(matchDetail.getMatch().getTournament(), matchDetailDTO.getTeamTwo());
