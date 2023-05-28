@@ -15,13 +15,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MatchDetailResource implements MatchDetailAPI {
         private final MatchDetailService matchDetailService;
-//    @Override
-//    public ResponseEntity<List<MatchDetailCustomDTO>> getAllMatchDetail() {
-//        return ResponseEntity.ok(matchDetailService.getAllMatchDetail());
-//    }
+    @Override
+    public ResponseEntity<List<MatchDetailDTO>> getAllMatchDetail() {
+        return ResponseEntity.ok(matchDetailService.getAllMatchDetail());
+    }
 
     @Override
-    public ResponseEntity<MatchDetail> createMatchDetail(Long id, MatchDetailDTO matchDetailDTO) {
+    public ResponseEntity<MatchDetailDTO> createMatchDetail(Long id, MatchDetailDTO matchDetailDTO) {
         return ResponseEntity.ok(matchDetailService.createMatchDetail(matchDetailDTO, id));
     }
+
+//    @Override
+//    public ResponseEntity<MatchDetailDTO> updateMatchDetail(Long matchId, int gameId, MatchDetailDTO matchDetailDTO) {
+//        return ResponseEntity.ok(matchDetailService.updateMatchDetail(matchDetailDTO,matchId,gameId));
+//    }
 }

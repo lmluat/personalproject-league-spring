@@ -15,5 +15,5 @@ public class MatchDetailDTO {
     private String teamTwo;
     private String winningTeam;
     private String mostValuablePlayer;
-    public MatchDetailDTO(String teamOne, String teamTwo, int gameId){}
+    private Long matchId;
 }

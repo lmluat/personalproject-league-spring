@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -45,5 +46,12 @@ public class TeamDetailService {
         }
 
         return teamDetailRepository.save(teamDetail);
+    }
+    public TeamDetail findByTeamNameAndTournament(String teamName, Tournament tournament){
+        TeamDetail teamDetail = teamDetailRepository.findAll().stream()
+                .filter(t -> t.getTeam().getTeamName().equals(teamName))
+                .filter(t -> t.getTournament().getTournamentName().equals(tournament.getTournamentName()))
+                .collect(Collectors.toList()).get(0);
+        return teamDetail;
     }
 }

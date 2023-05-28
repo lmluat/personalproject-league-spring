@@ -62,5 +62,8 @@ public class DemoException {
         return notFound(MATCH_DETAIL_NOT_FOUND_MSG_KEY, MATCH_DETAIL_NOT_FOUND_MSG);
     }
 
+    public static ResponseException TeamNotFound() {
+        return notFound(TEAM_NOT_FOUND_MSG_KEY, TEAM_NOT_FOUND_MSG);
+    }
 
 }

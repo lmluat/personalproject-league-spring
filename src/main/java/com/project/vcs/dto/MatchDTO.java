@@ -19,5 +19,5 @@ public class MatchDTO {
     private String casterName;
     private LocalDate date;
     private String location;
-
+    private Long id;
 }

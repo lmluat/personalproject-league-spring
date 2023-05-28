@@ -7,11 +7,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/matchdetails")
 public interface MatchDetailAPI {
-//    @GetMapping("/matchdetails")
-//    ResponseEntity<List<MatchDetailCustomDTO>> getAllMatchDetail();
-    @PostMapping("/matchdetails/{matchid}")
-    ResponseEntity<MatchDetail> createMatchDetail(@PathVariable("matchid") Long id,
+    @GetMapping
+    ResponseEntity<List<MatchDetailDTO>> getAllMatchDetail();
+    @PostMapping("/{matchid}")
+    ResponseEntity<MatchDetailDTO> createMatchDetail(@PathVariable("matchid") Long id,
                                                   @RequestBody MatchDetailDTO matchDetailDTO);
+//    @PutMapping("/{matchid}/{gameid}")
+//    ResponseEntity<MatchDetailDTO> updateMatchDetail(@PathVariable("matchid") Long matchId,
+//                                                     @PathVariable("gameid") int gameId,
+//                                                     @RequestBody MatchDetailDTO matchDetailDTO);
 }

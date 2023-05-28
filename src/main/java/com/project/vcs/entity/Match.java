@@ -28,8 +28,6 @@ public class Match {
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "caster_id", nullable = false)
     private Caster caster;
-
-
     @ManyToOne
     @JoinColumn(name = "tournament", nullable = false)
     private Tournament tournament;

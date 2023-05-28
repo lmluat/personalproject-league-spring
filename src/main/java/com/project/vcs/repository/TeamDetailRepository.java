@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface TeamDetailRepository extends JpaRepository<TeamDetail, Long> {
         TeamDetail findByTeam(Team team);
+
 }

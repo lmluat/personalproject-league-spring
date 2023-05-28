@@ -15,6 +15,7 @@ public interface MatchMapper {
 
     @Mapping(target="casterName",source="caster.firstName")
     @Mapping(target="tournamentName",source="tournament.tournamentName")
+    @Mapping(target="id",source="id")
     MatchDTO toDTO(Match match);
 
     List<MatchDTO> toDTOs(List<Match> matchList);
