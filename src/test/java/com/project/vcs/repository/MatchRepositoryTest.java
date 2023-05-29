@@ -7,14 +7,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-class MatchDetailRepositoryTest {
+class MatchRepositoryTest {
     @Autowired
-    MatchDetailRepository matchDetailRepository;
+    MatchRepository matchRepository;
     @Test
-    void findByMatchIdAndGameId() {
-        matchDetailRepository.findByMatchId(1L);
+    void findByTournamentName() {
+        matchRepository.findByTournamentName("VIETNAM CHAMPIONSHIP SERIES 2023");
+        matchRepository.findById(1L).get().getMatchDetailList().get(0).getTeamOne().getTeam().getTeamName();
+        System.out.println(matchRepository.findById(19L).get().getMatchDetailList().get(0).getTeamOne().getTeam().getTeamName());
     }
+
 }

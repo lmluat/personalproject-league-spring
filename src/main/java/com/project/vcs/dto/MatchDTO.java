@@ -3,6 +3,7 @@ package com.project.vcs.dto;
 import com.project.vcs.entity.Caster;
 import com.project.vcs.entity.Tournament;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class MatchDTO {

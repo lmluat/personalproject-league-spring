@@ -1,6 +1,7 @@
 package com.project.vcs.service.mapper;
 
 import com.project.vcs.dto.MatchDTO;
+import com.project.vcs.dto.custom.MatchScheduleTournamentDTO;
 import com.project.vcs.dto.custom.MatchUpdateDTO;
 import com.project.vcs.entity.Match;
 import org.mapstruct.Mapper;

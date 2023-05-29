@@ -1,6 +1,7 @@
 package com.project.vcs.service;
 
 import com.project.vcs.dto.MatchDetailDTO;
+import com.project.vcs.dto.custom.MatchScheduleTournamentDTO;
 import com.project.vcs.entity.*;
 import com.project.vcs.exception.DemoException;
 import com.project.vcs.repository.*;
@@ -8,9 +9,9 @@ import com.project.vcs.service.mapper.MatchDetailMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,6 +24,7 @@ public class MatchDetailService {
     private final TeamRepository teamRepository;
     private final PlayerDetailService playerDetailService;
     private final TeamDetailService teamDetailService;
+    private final TournamentRepository tournamentRepository;
     public List<MatchDetailDTO> getAllMatchDetail(){
         return MatchDetailMapper.INSTANCE.toDTOs(matchDetailRepository.findAll());
     }
@@ -126,5 +128,23 @@ public class MatchDetailService {
         matchDetailRepository.save(matchDetail);
 
         return MatchDetailMapper.INSTANCE.toDTO(matchDetail);
+    }
+    public List<MatchScheduleTournamentDTO> getMatchScheduleByTournament(Long tournamentId){
+        int gameId = 1;
+        Tournament tournament = tournamentRepository.findById(tournamentId).orElseThrow(DemoException::TournamentNotFound);
+        List<MatchDetail> matchDetailList = matchDetailRepository.findAll().stream()
+                .filter(m -> m.getMatch().getTournament().getId() == tournamentId)
+                .filter(m -> m.getGameId() == gameId)
+                .collect(Collectors.toList());
+        return MatchDetailMapper.INSTANCE.toScheduleTournamentDTOs(matchDetailList);
+    }
+    public List<MatchScheduleTournamentDTO> getMatchScheduleFromStartDateToEndDate(LocalDate startDate, LocalDate endDate){
+        int gameId = 1;
+        List<MatchDetail> matchDetailList = matchDetailRepository.findAll().stream()
+                .filter(m -> m.getGameId() == gameId)
+                .filter(m -> m.getMatch().getDate().isAfter(startDate))
+                .filter(m -> m.getMatch().getDate().isBefore(endDate))
+                .collect(Collectors.toList());
+        return MatchDetailMapper.INSTANCE.toScheduleTournamentDTOs(matchDetailList);
     }
 }

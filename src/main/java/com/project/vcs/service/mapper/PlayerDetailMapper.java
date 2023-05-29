@@ -12,7 +12,6 @@ import java.util.List;
 public interface PlayerDetailMapper {
     PlayerDetailMapper INSTANCE = Mappers.getMapper(PlayerDetailMapper.class);
 
-    @Mapping(target="firstName",source="player.firstName")
     @Mapping(target="ingameName",source="player.ingameName")
     @Mapping(target="teamName",source="teamDetail.team.teamName")
     @Mapping(target="tournamentName",source="teamDetail.tournament.tournamentName")
