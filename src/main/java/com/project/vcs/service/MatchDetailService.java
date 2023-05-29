@@ -96,14 +96,8 @@ public class MatchDetailService {
         }
         return teamDetail;
     }
-    public MatchDetailDTO updateMatchDetail(MatchDetailDTO matchDetailDTO, Long matchId, int gameId){
-        List<MatchDetail> matchDetails = matchDetailRepository.findByMatchId(matchId);
-        if(matchDetails == null){
-            throw DemoException.MatchDetailNotFound();
-        }
-        MatchDetail matchDetail = matchDetails.stream()
-                .filter(m -> m.getGameId() == gameId)
-                .findFirst().orElseThrow(DemoException::MatchDetailNotFound);
+    public MatchDetailDTO updateMatchDetail(MatchDetailDTO matchDetailDTO, Long matchDetailId){
+        MatchDetail matchDetail = matchDetailRepository.findById(matchDetailId).orElseThrow(DemoException::MatchDetailNotFound);
 
         TeamDetail teamOneDetail = getTeamDetail(matchDetail.getMatch().getTournament(), matchDetailDTO.getTeamOne());
         TeamDetail teamTwoDetail = getTeamDetail(matchDetail.getMatch().getTournament(), matchDetailDTO.getTeamTwo());
@@ -113,7 +107,7 @@ public class MatchDetailService {
         if(player == null){
             throw DemoException.PlayerNotFound();
         }
-        Tournament tournament = matchRepository.findById(matchId).orElseThrow(DemoException::TournamentNotFound).getTournament();
+        Tournament tournament = matchRepository.findById(matchDetail.getMatch().getId()).orElseThrow(DemoException::TournamentNotFound).getTournament();
         TeamDetail winningTeamDetail = teamDetailService.findByTeamNameAndTournament(matchDetailDTO.getWinningTeam(), tournament);
         List<PlayerDetail> playerDetailListWinningTeam = playerDetailService.findByTeamDetail(winningTeamDetail);
 

@@ -27,8 +27,8 @@ public class MatchDetailResource implements MatchDetailAPI {
     }
 
     @Override
-    public ResponseEntity<MatchDetailDTO> updateMatchDetail(Long matchId, int gameId, MatchDetailDTO matchDetailDTO) {
-        return ResponseEntity.ok(matchDetailService.updateMatchDetail(matchDetailDTO,matchId,gameId));
+    public ResponseEntity<MatchDetailDTO> updateMatchDetail(Long matchDetailId, MatchDetailDTO matchDetailDTO) {
+        return ResponseEntity.ok(matchDetailService.updateMatchDetail(matchDetailDTO,matchDetailId));
     }
 
     @Override

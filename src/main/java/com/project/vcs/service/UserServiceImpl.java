@@ -6,9 +6,12 @@ import com.project.vcs.entity.UserRoleAssignment;
 import com.project.vcs.jwt.JwtRequest;
 import com.project.vcs.jwt.JwtResponse;
 import com.project.vcs.jwt.JwtUtils;
+import com.project.vcs.jwt.MessageResponse;
 import com.project.vcs.repository.UserRepository;
 import com.project.vcs.service.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,6 +27,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
@@ -36,6 +40,9 @@ public class UserServiceImpl implements UserService{
         return UserMapper.INSTANCE.mapToDtos(userRepository.findAll());
     }
     public ResponseEntity<?> registerUser(UserDTO userDTO) {
+        if(userRepository.findByUsername(userDTO.getUsername()).isPresent()){
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
+        }
         User user = new User(userDTO.getUsername(), encoder.encode(userDTO.getPassword()));
 
         List<UserRoleAssignment> userRoleAssignmentList = new ArrayList<>();
@@ -55,7 +62,7 @@ public class UserServiceImpl implements UserService{
 
         return ResponseEntity.ok("User registered successfully!");
     }
-    public ResponseEntity<?> authenticateUser(JwtRequest loginRequest) {
+    public JwtResponse authenticateUser(JwtRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -68,8 +75,8 @@ public class UserServiceImpl implements UserService{
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(new JwtResponse(jwt,
+        return new JwtResponse(jwt,
                 userDetails.getUsername(),
-                roles));
+                roles);
     }
 }
