@@ -15,12 +15,12 @@ class PlayerDetailRepositoryTest {
     PlayerDetailRepository playerDetailRepository;
     @Test
     void getCountOfMVPPlayers() {
-        System.out.println(playerDetailRepository.getCountOfMvpPlayers("Shogun","VIETNAM CHAMPIONSHIP SERIES 2023"));
+//        System.out.println(playerDetailRepository.getCountOfMvpPlayers("Shogun","VIETNAM CHAMPIONSHIP SERIES 2023"));
 
     }
 
     @Test
     void getDistinctPlayerIngameNamesByTournament() {
-    playerDetailRepository.getDistinctPlayerIngameNamesByTournament("VIETNAM CHAMPIONSHIP SERIES 2023");
+//    playerDetailRepository.getDistinctPlayerIngameNamesByTournament("VIETNAM CHAMPIONSHIP SERIES 2023");
     }
 }

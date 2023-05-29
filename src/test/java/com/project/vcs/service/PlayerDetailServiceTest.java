@@ -16,6 +16,11 @@ class PlayerDetailServiceTest {
     PlayerDetailService playerDetailService;
     @Test
     void getCountOfMVPPlayers() {
-        System.out.println(playerDetailService.getCountOfMVPPlayers("VIETNAM CHAMPIONSHIP SERIES 2023"));
+//        System.out.println(playerDetailService.getCountOfMVPPlayers("VIETNAM CHAMPIONSHIP SERIES 2023"));
+    }
+
+    @Test
+    void getPlayerDetailListByTournament() {
+        System.out.println(playerDetailService.getPlayerDetailListByTournament("VIETNAM CHAMPIONSHIP SERIES 2023"));
     }
 }

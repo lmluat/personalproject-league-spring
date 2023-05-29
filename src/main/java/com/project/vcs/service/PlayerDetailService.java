@@ -4,11 +4,13 @@ import com.project.vcs.dto.PlayerDetailDTO;
 import com.project.vcs.entity.Player;
 import com.project.vcs.entity.PlayerDetail;
 import com.project.vcs.entity.TeamDetail;
+import com.project.vcs.entity.Tournament;
 import com.project.vcs.exception.DemoException;
 import com.project.vcs.repository.PlayerDetailRepository;
 import com.project.vcs.repository.PlayerRepository;
 import com.project.vcs.repository.TeamDetailRepository;
 //import com.project.vcs.service.mapper.PlayerDetailMapper;
+import com.project.vcs.repository.TournamentRepository;
 import com.project.vcs.service.mapper.PlayerDetailMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,7 @@ public class PlayerDetailService {
     private final PlayerDetailRepository playerDetailRepository;
     private final PlayerRepository playerRepository;
     private final TeamDetailRepository teamDetailRepository;
+    private final TournamentRepository tournamentRepository;
     public List<PlayerDetailDTO> getAllPlayerDetail(){
         return PlayerDetailMapper.INSTANCE.toDTOs(playerDetailRepository.findAll());
     }
@@ -64,6 +67,14 @@ public class PlayerDetailService {
         }
         playerDetailRepository.save(playerDetail);
         return PlayerDetailMapper.INSTANCE.toDTO(playerDetail);
+    }
+    public List<PlayerDetailDTO> getPlayerDetailListByTournament(String tournamentName){
+        Tournament tournament = tournamentRepository.findBytournamentName(tournamentName).orElseThrow(DemoException::TournamentNotFound);
+
+        List<PlayerDetail> playerDetailList = playerDetailRepository.findAll().stream()
+                .filter(p -> p.getTeamDetail().getTournament().equals(tournament))
+                .collect(Collectors.toList());
+        return PlayerDetailMapper.INSTANCE.toDTOs(playerDetailList);
     }
 
 }
