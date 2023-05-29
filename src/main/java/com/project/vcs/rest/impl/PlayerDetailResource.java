@@ -19,7 +19,12 @@ public class PlayerDetailResource implements PlayerDetailAPI {
     }
 
     @Override
-    public ResponseEntity<PlayerDetail> createPlayerDetail(Long id, PlayerDetailDTO playerDetailDTO) {
+    public ResponseEntity<PlayerDetailDTO> createPlayerDetail(Long id, PlayerDetailDTO playerDetailDTO) {
         return ResponseEntity.ok(playerDetailService.createPlayerDetail(playerDetailDTO, id));
+    }
+
+    @Override
+    public ResponseEntity<PlayerDetailDTO> updatePlayerDetail(Long playerDetailId, Long teamDetailID, Long playerId, PlayerDetailDTO playerDetailDTO) {
+        return ResponseEntity.ok(playerDetailService.updatePlayerDetail(playerDetailId, teamDetailID, playerId, playerDetailDTO));
     }
 }

@@ -6,11 +6,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/playerdetails")
 public interface PlayerDetailAPI {
-    @GetMapping("/playerdetails")
+    @GetMapping
     ResponseEntity<List<PlayerDetailDTO>> getAllPlayerDetail();
-    @PostMapping("/playerdetails/{teamdetailid}")
-    ResponseEntity<PlayerDetail> createPlayerDetail(@PathVariable("teamdetailid") Long id,
+    @PostMapping("/{teamdetailid}")
+    ResponseEntity<PlayerDetailDTO> createPlayerDetail(@PathVariable("teamdetailid") Long id,
                                                     @RequestBody PlayerDetailDTO playerDetailDTO);
+    @PutMapping("{playerdetailid}/{teamdetailid}/{playerid}")
+    ResponseEntity<PlayerDetailDTO> updatePlayerDetail(@PathVariable("playerdetailid") Long playerDetailId,
+                                                       @PathVariable("teamdetailid") Long teamDetailID,
+                                                       @PathVariable("playerid") Long playerId,
+                                                       @RequestBody PlayerDetailDTO playerDetailDTO);
 }
