@@ -36,7 +36,6 @@ public class MatchDetail {
     @JoinColumn(name ="mvp_player")
     private PlayerDetail mostValuablePlayer;
 
-
     public MatchDetail(Match match, int gameId, TeamDetail teamOne, TeamDetail teamTwo) {
         this.match = match;
         this.gameId = gameId;

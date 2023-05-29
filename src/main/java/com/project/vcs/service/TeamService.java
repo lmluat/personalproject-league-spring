@@ -2,6 +2,7 @@ package com.project.vcs.service;
 
 import com.project.vcs.dto.TeamDTO;
 import com.project.vcs.entity.Team;
+import com.project.vcs.exception.DemoException;
 import com.project.vcs.repository.TeamRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,6 @@ public class TeamService {
         return teamRepository.save(team);
     }
     public Team findByTeamName(String name){
-        return teamRepository.findByTeamName(name);
+        return teamRepository.findByTeamName(name).orElseThrow(DemoException::TeamNotFound);
     }
 }

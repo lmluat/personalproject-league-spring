@@ -41,6 +41,11 @@ class MatchDetailServiceTest {
                 .winningTeam("Saigon Buffalo")
                 .mostValuablePlayer("Shogun")
                 .build();
-        matchDetailService.updateMatchDetail(matchDetailDTO, 19L,1);
+        matchDetailService.updateMatchDetail(matchDetailDTO, 33L,1);
+    }
+
+    @Test
+    void isMatchDetailListExistedMatchIdGameId() {
+        System.out.println(matchDetailService.isMatchDetailListExistedMatchIdGameId(28L,4));
     }
 }

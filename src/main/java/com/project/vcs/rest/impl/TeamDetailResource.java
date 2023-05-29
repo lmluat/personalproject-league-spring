@@ -3,6 +3,7 @@ package com.project.vcs.rest.impl;
 import com.project.vcs.dto.TeamDetailDTO;
 //import com.project.vcs.dto.custom.TeamDetailCustomDTO;
 import com.project.vcs.dto.custom.TeamDetailCustomDTO;
+import com.project.vcs.dto.custom.TeamStatsDTO;
 import com.project.vcs.entity.TeamDetail;
 import com.project.vcs.rest.TeamDetailAPI;
 import com.project.vcs.service.TeamDetailService;
@@ -24,6 +25,16 @@ public class TeamDetailResource implements TeamDetailAPI {
     @Override
     public ResponseEntity<TeamDetail> createTeamDetail(Long id,TeamDetailDTO teamDetailDTO) {
         return ResponseEntity.ok(teamDetailService.createTeamDetail(id,teamDetailDTO));
+    }
+
+    @Override
+    public ResponseEntity<TeamStatsDTO> getWinningRateInTournament(String teamName, String tournamentName) {
+        return ResponseEntity.ok(teamDetailService.getWinningRateInTournament(teamName,tournamentName));
+    }
+
+    @Override
+    public ResponseEntity<List<TeamStatsDTO>> getListTeamStats(String tournamentName) {
+        return ResponseEntity.ok(teamDetailService.getListTeamStats(tournamentName));
     }
 
 }

@@ -32,13 +32,15 @@ public class MatchDetailService {
         return matchDetailRepository.findById(id).orElseThrow(DemoException::MatchDetailNotFound);
     }
     public MatchDetailDTO createMatchDetail(MatchDetailDTO matchDetailDTO, Long matchId) {
+        if(isMatchDetailListExistedMatchIdGameId(matchId, matchDetailDTO.getGameId())){
+            throw DemoException.badRequest("BadRequest","MatchDetailExisted");
+        }
 
         Tournament tournament = matchRepository.findById(matchId).orElseThrow(DemoException::TournamentNotFound).getTournament();
         Player player = playerRepository.findByingameName(matchDetailDTO.getMostValuablePlayer());
         if(player == null){
             throw DemoException.PlayerNotFound();
         }
-
         String winningTeam = null;
         if (matchDetailDTO.getWinningTeam().equals(matchDetailDTO.getTeamOne()) || matchDetailDTO.getWinningTeam().equals(matchDetailDTO.getTeamTwo())) {
             winningTeam = matchDetailDTO.getWinningTeam();
@@ -76,7 +78,7 @@ public class MatchDetailService {
     }
 
     public TeamDetail getTeamDetail(Tournament tournament, String teamName){
-        Team team = teamRepository.findByTeamName(teamName);
+        Team team = teamRepository.findByTeamName(teamName).orElseThrow(DemoException::TeamNotFound);
         if(team == null){
             throw DemoException.TeamNotFound();
         }
@@ -147,5 +149,12 @@ public class MatchDetailService {
                 .filter(m -> m.getMatch().getDate().isBefore(endDate))
                 .collect(Collectors.toList());
         return MatchDetailMapper.INSTANCE.toScheduleTournamentDTOs(matchDetailList);
+    }
+    public boolean isMatchDetailListExistedMatchIdGameId(Long matchId, int gameId){
+        List<MatchDetail> matchDetailList = matchDetailRepository.findAll().stream()
+                .filter(m -> m.getMatch().getId() == matchId)
+                .filter(m -> m.getGameId() == gameId)
+                .collect(Collectors.toList());
+        return matchDetailList.size() > 0;
     }
 }

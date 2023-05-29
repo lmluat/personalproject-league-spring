@@ -32,12 +32,12 @@ public class MatchService {
         Caster caster = casterRepository.findById(casterId).orElseThrow(DemoException::CasterNotFound);
         int gameId = 1;
 
-        Team teamOne = teamRepository.findByTeamName(matchInformationDTO.getTeamOne());
-        Team teamTwo = teamRepository.findByTeamName(matchInformationDTO.getTeamTwo());
+        Team teamOne = teamRepository.findByTeamName(matchInformationDTO.getTeamOne()).orElseThrow(DemoException::TeamNotFound);
+        Team teamTwo = teamRepository.findByTeamName(matchInformationDTO.getTeamTwo()).orElseThrow(DemoException::TeamNotFound);
 
         TeamDetail teamOneDetail = teamDetailRepository.findByTeam(teamOne);
         TeamDetail teamTwoDetail = teamDetailRepository.findByTeam(teamTwo);
-        if (isMatchIdGameIdExistingOnSameDay(teamOneDetail, teamTwoDetail, tournament, matchInformationDTO.getDate())) {
+        if (isMatchListExistedByTeamDetailsAndDate(teamOneDetail, teamTwoDetail, tournament, matchInformationDTO.getDate())) {
             throw DemoException.internalServerError("BadRequest", "MatchExisted");
         }
 
@@ -79,7 +79,7 @@ public class MatchService {
         Match match = matchRepository.findById(matchId).orElseThrow(DemoException::MatchNotFound);
         matchRepository.delete(match);
     }
-    public boolean isMatchIdGameIdExistingOnSameDay(TeamDetail teamOneDetail, TeamDetail teamTwoDetail, Tournament tournament, LocalDate date) {
+    public boolean isMatchListExistedByTeamDetailsAndDate(TeamDetail teamOneDetail, TeamDetail teamTwoDetail, Tournament tournament, LocalDate date) {
         List<Match> matchList = matchRepository.findAll().stream()
                 .filter(m -> m.getTournament().getId() == tournament.getId())
                 .filter(m -> m.getDate().isEqual(date))
