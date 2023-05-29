@@ -1,10 +1,10 @@
 package com.project.vcs.service;
 
 import com.project.vcs.dto.PlayerDetailDTO;
-import com.project.vcs.dto.custom.MVPCountPlayerDTO;
-import com.project.vcs.entity.*;
+import com.project.vcs.entity.Player;
+import com.project.vcs.entity.PlayerDetail;
+import com.project.vcs.entity.TeamDetail;
 import com.project.vcs.exception.DemoException;
-import com.project.vcs.repository.MatchDetailRepository;
 import com.project.vcs.repository.PlayerDetailRepository;
 import com.project.vcs.repository.PlayerRepository;
 import com.project.vcs.repository.TeamDetailRepository;
@@ -13,8 +13,8 @@ import com.project.vcs.service.mapper.PlayerDetailMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,7 +23,6 @@ public class PlayerDetailService {
     private final PlayerDetailRepository playerDetailRepository;
     private final PlayerRepository playerRepository;
     private final TeamDetailRepository teamDetailRepository;
-    private final MatchDetailRepository matchDetailRepository;
     public List<PlayerDetailDTO> getAllPlayerDetail(){
         return PlayerDetailMapper.INSTANCE.toDTOs(playerDetailRepository.findAll());
     }
@@ -65,18 +64,6 @@ public class PlayerDetailService {
         }
         playerDetailRepository.save(playerDetail);
         return PlayerDetailMapper.INSTANCE.toDTO(playerDetail);
-    }
-    public List<MVPCountPlayerDTO> getCountOfMVPPlayers(String tournamentName){
-
-        List<String> listIngameName = playerDetailRepository.getDistinctPlayerIngameNamesByTournament(tournamentName);
-
-        List<MVPCountPlayerDTO> mvpCountPlayerDTOS = new ArrayList<>();
-
-        listIngameName.forEach(ingameName -> {
-            Integer numberOfMVP = playerDetailRepository.getCountOfMvpPlayers(ingameName,tournamentName);
-            mvpCountPlayerDTOS.add(new MVPCountPlayerDTO(ingameName,numberOfMVP));
-        });
-        return mvpCountPlayerDTOS;
     }
 
 }
