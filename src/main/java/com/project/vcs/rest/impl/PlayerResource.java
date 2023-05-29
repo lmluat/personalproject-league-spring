@@ -30,4 +30,9 @@ public class PlayerResource implements PlayerAPI {
         playerService.deletePlayer(id);
         return ResponseEntity.noContent().build();
     }
+
+    @Override
+    public ResponseEntity<PlayerDTO> updatePlayer(Long playerId, PlayerDTO playerDTO) {
+        return ResponseEntity.ok(playerService.updatePlayer(playerDTO,playerId));
+    }
 }

@@ -23,4 +23,6 @@ public interface MatchMapper {
     @Mapping(target="location",source="location")
     @Mapping(target="date",source="date")
     MatchUpdateDTO toUpdateDTO(Match match);
+
+    List<MatchUpdateDTO> toUpdateDTOs(List<Match> matchList);
 }

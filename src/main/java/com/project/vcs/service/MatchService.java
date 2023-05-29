@@ -6,6 +6,7 @@ import com.project.vcs.dto.MatchDTO;
 //import com.project.vcs.dto.custom.MatchScheduleDTO;
 import com.project.vcs.dto.MatchDetailDTO;
 import com.project.vcs.dto.custom.MatchScheduleDTO;
+import com.project.vcs.dto.custom.MatchUpdateDTO;
 import com.project.vcs.entity.*;
 import com.project.vcs.exception.DemoException;
 import com.project.vcs.repository.*;
@@ -67,16 +68,18 @@ public class MatchService {
         if (matchDTO.getDate() != null) {
             match.setDate(matchDTO.getDate());
         }
-
         if (matchDTO.getLocation() != null) {
             match.setLocation(matchDTO.getLocation());
         }
 
+        match.setCaster(caster);
+        match.setTournament(tournament);
+        matchRepository.save(match);
 
-        if (matchDTO.getTournamentName() != null) {
-            match.setTournament(tournament);
-        }
-
+        return MatchMapper.INSTANCE.toDTO(match);
     }
-
+    public void deleteMatch(Long matchId){
+        Match match = matchRepository.findById(matchId).orElseThrow(DemoException::MatchNotFound);
+        matchRepository.delete(match);
+    }
 }

@@ -7,12 +7,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/players")
 public interface PlayerAPI {
-    @GetMapping("/players")
+    @GetMapping
     ResponseEntity<List<Player>> getAllPlayer();
-    @PostMapping("/players/id")
+    @PostMapping("/id")
     ResponseEntity<Player> createPlayer(@RequestBody PlayerDTO playerDTO);
-    @DeleteMapping("/players/{id}")
+    @DeleteMapping("/{id}")
     ResponseEntity<Void> deletePlayer(@PathVariable("id") Long id);
+    @PutMapping("/{playerid}")
+    ResponseEntity<PlayerDTO> updatePlayer(@PathVariable("playerid") Long playerId,
+                                           @RequestBody PlayerDTO playerDTO);
 }
