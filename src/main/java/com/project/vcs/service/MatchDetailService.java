@@ -106,6 +106,7 @@ public class MatchDetailService {
         TeamDetail teamOneDetail = getTeamDetail(matchDetail.getMatch().getTournament(), matchDetailDTO.getTeamOne());
         TeamDetail teamTwoDetail = getTeamDetail(matchDetail.getMatch().getTournament(), matchDetailDTO.getTeamTwo());
 
+
         Player player = playerRepository.findByingameName(matchDetailDTO.getMostValuablePlayer());
         if(player == null){
             throw DemoException.PlayerNotFound();

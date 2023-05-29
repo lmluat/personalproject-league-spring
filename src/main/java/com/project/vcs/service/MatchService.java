@@ -9,8 +9,10 @@ import com.project.vcs.service.mapper.MatchMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,8 +28,8 @@ public class MatchService {
         return MatchMapper.INSTANCE.toDTOs(matchRepository.findAll());
     }
     public MatchInformationDTO createMatch(MatchInformationDTO matchInformationDTO, Long tournamentId, Long casterId) {
-        Tournament tournament = tournamentRepository.findById(tournamentId).get();
-        Caster caster = casterRepository.findById(casterId).get();
+        Tournament tournament = tournamentRepository.findById(tournamentId).orElseThrow(DemoException::TournamentNotFound);
+        Caster caster = casterRepository.findById(casterId).orElseThrow(DemoException::CasterNotFound);
         int gameId = 1;
 
         Team teamOne = teamRepository.findByTeamName(matchInformationDTO.getTeamOne());
@@ -35,6 +37,9 @@ public class MatchService {
 
         TeamDetail teamOneDetail = teamDetailRepository.findByTeam(teamOne);
         TeamDetail teamTwoDetail = teamDetailRepository.findByTeam(teamTwo);
+        if (isMatchIdGameIdExistingOnSameDay(teamOneDetail, teamTwoDetail, tournament, matchInformationDTO.getDate())) {
+            throw DemoException.internalServerError("BadRequest", "MatchExisted");
+        }
 
         Match match = Match.builder()
                 .date(matchInformationDTO.getDate())
@@ -74,4 +79,17 @@ public class MatchService {
         Match match = matchRepository.findById(matchId).orElseThrow(DemoException::MatchNotFound);
         matchRepository.delete(match);
     }
+    public boolean isMatchIdGameIdExistingOnSameDay(TeamDetail teamOneDetail, TeamDetail teamTwoDetail, Tournament tournament, LocalDate date) {
+        List<Match> matchList = matchRepository.findAll().stream()
+                .filter(m -> m.getTournament().getId() == tournament.getId())
+                .filter(m -> m.getDate().isEqual(date))
+                .filter(m -> m.getMatchDetailList().stream()
+                        .anyMatch(md -> md.getTeamOne().equals(teamOneDetail))
+                        && m.getMatchDetailList().stream()
+                        .anyMatch(md -> md.getTeamTwo().equals(teamTwoDetail)))
+                .collect(Collectors.toList());
+        return !matchList.isEmpty();
+    }
+
+
 }
