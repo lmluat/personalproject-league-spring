@@ -6,11 +6,14 @@ import com.project.vcs.exception.DemoException;
 import com.project.vcs.repository.CasterRepository;
 import com.project.vcs.service.mapper.CasterMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class CasterService {
     private final CasterRepository casterRepository;
