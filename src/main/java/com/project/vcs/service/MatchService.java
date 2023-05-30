@@ -7,6 +7,7 @@ import com.project.vcs.exception.DemoException;
 import com.project.vcs.repository.*;
 import com.project.vcs.service.mapper.MatchMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class MatchService {
     private final MatchRepository matchRepository;
@@ -29,8 +31,9 @@ public class MatchService {
     }
     public MatchInformationDTO createMatch(MatchInformationDTO matchInformationDTO, Long tournamentId, Long casterId) {
         Tournament tournament = tournamentRepository.findById(tournamentId).orElseThrow(DemoException::TournamentNotFound);
+        log.error(DemoException.CasterNotFound().getMessage());
         Caster caster = casterRepository.findById(casterId).orElseThrow(DemoException::CasterNotFound);
-        int gameId = 1;
+        final int gameId = 1;
 
         Team teamOne = teamRepository.findByTeamName(matchInformationDTO.getTeamOne()).orElseThrow(DemoException::TeamNotFound);
         Team teamTwo = teamRepository.findByTeamName(matchInformationDTO.getTeamTwo()).orElseThrow(DemoException::TeamNotFound);
@@ -61,7 +64,7 @@ public class MatchService {
         Match match = matchRepository.findById(matchId).orElseThrow(DemoException::MatchNotFound);
         Caster caster = casterRepository.findById(casterId).orElseThrow(DemoException::CasterNotFound);
         Tournament tournament = tournamentRepository.findById(tournamentId).orElseThrow(DemoException::TournamentNotFound);
-
+        log.info("Update Match");
         if (matchDTO.getDate() != null) {
             match.setDate(matchDTO.getDate());
         }

@@ -32,7 +32,7 @@ public class Match {
     @JoinColumn(name = "tournament", nullable = false)
     private Tournament tournament;
     @JsonIgnore
-    @OneToMany(mappedBy = "match", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "match", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<MatchDetail> matchDetailList = new ArrayList<>();
 
 }

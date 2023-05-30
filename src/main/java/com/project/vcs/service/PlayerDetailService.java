@@ -13,6 +13,7 @@ import com.project.vcs.repository.TeamDetailRepository;
 import com.project.vcs.repository.TournamentRepository;
 import com.project.vcs.service.mapper.PlayerDetailMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class PlayerDetailService {
     private final PlayerDetailRepository playerDetailRepository;
@@ -30,7 +32,7 @@ public class PlayerDetailService {
         return PlayerDetailMapper.INSTANCE.toDTOs(playerDetailRepository.findAll());
     }
     public PlayerDetailDTO createPlayerDetail(PlayerDetailDTO playerDetailDTO, Long teamDetailId){
-        TeamDetail teamDetail = teamDetailRepository.findById(teamDetailId).get();
+        TeamDetail teamDetail = teamDetailRepository.findById(teamDetailId).orElseThrow(DemoException::PlayerDetailNotFound);
 
          PlayerDetail playerDetail = PlayerDetail.builder()
                  .teamDetail(teamDetail)

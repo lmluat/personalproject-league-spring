@@ -7,7 +7,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
-public class VcsApplication extends SpringBootServletInitializer {
+public class                       VcsApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) {
 		SpringApplication.run(VcsApplication.class, args);
 	}

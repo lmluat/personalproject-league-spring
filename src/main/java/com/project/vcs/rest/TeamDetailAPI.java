@@ -15,7 +15,7 @@ public interface TeamDetailAPI {
     ResponseEntity<List<TeamDetailCustomDTO>> getAllTeamDetail();
     @PostMapping("/{tournamentid}")
     ResponseEntity<TeamDetail> createTeamDetail(@PathVariable("tournamentid") Long id, @RequestBody TeamDetailDTO teamDetailDTO);
-    @GetMapping("/team/teams-stat")
+    @GetMapping("/team/teamstats")
     ResponseEntity<TeamStatsDTO> getWinningRateInTournament(@RequestParam("teamname") String teamName,
                                                             @RequestParam("tournamentname") String tournamentName);
     @GetMapping("/teamstats")

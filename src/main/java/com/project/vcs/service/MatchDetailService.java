@@ -7,6 +7,7 @@ import com.project.vcs.exception.DemoException;
 import com.project.vcs.repository.*;
 import com.project.vcs.service.mapper.MatchDetailMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -15,6 +16,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class MatchDetailService {
     private final MatchDetailRepository matchDetailRepository;
@@ -33,6 +35,7 @@ public class MatchDetailService {
     }
     public MatchDetailDTO createMatchDetail(MatchDetailDTO matchDetailDTO, Long matchId) {
         if(isMatchDetailListExistedMatchIdGameId(matchId, matchDetailDTO.getGameId())){
+            log.error(DemoException.MatchDetailNotFound().getMessage());
             throw DemoException.badRequest("BadRequest","MatchDetailExisted");
         }
 
@@ -62,7 +65,7 @@ public class MatchDetailService {
             teamTwo = getTeamDetail(tournament, matchDetailDTO.getTeamTwo());
         }
 
-        Match match = matchRepository.findById(matchId).get();
+        Match match = matchRepository.findById(matchId).orElseThrow(DemoException::MatchNotFound);
         
         MatchDetail matchDetail = MatchDetail.builder()
                 .match(match)
@@ -82,6 +85,7 @@ public class MatchDetailService {
         if(team == null){
             throw DemoException.TeamNotFound();
         }
+        log.error(DemoException.TeamNotFound().getMessage());
 
         TeamDetail teamDetail = new TeamDetail();
 
@@ -98,7 +102,7 @@ public class MatchDetailService {
     }
     public MatchDetailDTO updateMatchDetail(MatchDetailDTO matchDetailDTO, Long matchDetailId){
         MatchDetail matchDetail = matchDetailRepository.findById(matchDetailId).orElseThrow(DemoException::MatchDetailNotFound);
-
+        log.error("updateMatchDetail"+DemoException.MatchDetailNotFound().getMessage());
         TeamDetail teamOneDetail = getTeamDetail(matchDetail.getMatch().getTournament(), matchDetailDTO.getTeamOne());
         TeamDetail teamTwoDetail = getTeamDetail(matchDetail.getMatch().getTournament(), matchDetailDTO.getTeamTwo());
 
@@ -129,6 +133,7 @@ public class MatchDetailService {
     public List<MatchScheduleTournamentDTO> getMatchScheduleByTournament(Long tournamentId){
         int gameId = 1;
         Tournament tournament = tournamentRepository.findById(tournamentId).orElseThrow(DemoException::TournamentNotFound);
+        log.error(DemoException.TournamentNotFound().getMessage());
         List<MatchDetail> matchDetailList = matchDetailRepository.findAll().stream()
                 .filter(m -> m.getMatch().getTournament().getId() == tournamentId)
                 .filter(m -> m.getGameId() == gameId)

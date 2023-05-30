@@ -6,11 +6,13 @@ import com.project.vcs.exception.DemoException;
 import com.project.vcs.repository.PlayerRepository;
 import com.project.vcs.service.mapper.PlayerMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class PlayerService {
     private final PlayerRepository playerRepository;
@@ -27,6 +29,7 @@ public class PlayerService {
                 .homeTown(playerDTO.getHometown())
                 .ingameName(playerDTO.getIngameName())
                 .build();
+        log.info("Create Player");
         return playerRepository.save(player);
     }
     public PlayerDTO updatePlayer(PlayerDTO playerDTO, Long playerId){
