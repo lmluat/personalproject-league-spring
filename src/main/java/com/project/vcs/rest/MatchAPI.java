@@ -6,10 +6,13 @@ import com.project.vcs.dto.custom.MatchInformationDTO;
 import com.project.vcs.dto.custom.MatchScheduleTournamentDTO;
 import org.springframework.http.ResponseEntity;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequestMapping(value = "/api/matches")
 public interface MatchAPI {
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping
     ResponseEntity<List<MatchDTO>> getAllMatch();
     @PostMapping("/{tournamentid}/{casterid}")

@@ -32,8 +32,8 @@ public class CoachService {
         return CoachMapper.INSTANCE.toDTO(coach);
     }
     public CoachDTO updateCoach(CoachDTO coachDTO, Long id){
-        Coach coach = coachRepository.findById(id).orElseThrow(DemoException::CoachNotFound);
         log.error(DemoException.CoachNotFound().getMessage());
+        Coach coach = coachRepository.findById(id).orElseThrow(DemoException::CoachNotFound);
         if(coachDTO.getFirstName() != null){
             coach.setFirstName(coachDTO.getFirstName());
         }
@@ -58,8 +58,8 @@ public class CoachService {
 
     }
     public void deleteCoach(Long coachId){
-        Coach coach = coachRepository.findById(coachId).orElseThrow(DemoException::CoachNotFound);
         log.error(DemoException.CoachNotFound().getMessage());
+        Coach coach = coachRepository.findById(coachId).orElseThrow(DemoException::CoachNotFound);
         coachRepository.delete(coach);
     }
 

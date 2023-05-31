@@ -29,39 +29,46 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
     @Autowired
     private PasswordEncoder encoder;
+
     @Override
     public List<UserDTO> getUsers() {
         return UserMapper.INSTANCE.mapToDtos(userRepository.findAll());
     }
+
     public ResponseEntity<?> registerUser(UserDTO userDTO) {
-        if(userRepository.findByUsername(userDTO.getUsername()).isPresent()){
+        log.info("dto role: "+userDTO.getRoleList().size());
+
+        if (userRepository.findByUsername(userDTO.getUsername()).isPresent()) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
         }
         User user = new User(userDTO.getUsername(), encoder.encode(userDTO.getPassword()));
-
+        log.info("username : " + user.getUsername());
+        log.info("user test: ");
         List<UserRoleAssignment> userRoleAssignmentList = new ArrayList<>();
-        user.setERoleList(userDTO.getERoleList());
-
-        userDTO.getERoleList().forEach(u -> {
+        userDTO.getRoleList().forEach(u -> {
             UserRoleAssignment userRoleAssignment = new UserRoleAssignment();
 
             userRoleAssignment.setUsers(user);
             userRoleAssignment.setERole(u);
 
+            log.info("roleasdasds : " + u.name() );
+
             userRoleAssignmentList.add(userRoleAssignment);
         });
 
         user.setRoles(userRoleAssignmentList);
+        log.info("roles: "+user.getRoles().size());
         userRepository.save(user);
 
         return ResponseEntity.ok("User registered successfully!");
     }
+
     public JwtResponse authenticateUser(JwtRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
@@ -79,4 +86,5 @@ public class UserServiceImpl implements UserService{
                 userDetails.getUsername(),
                 roles);
     }
+
 }

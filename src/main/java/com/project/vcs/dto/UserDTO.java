@@ -16,6 +16,6 @@ import java.util.List;
 public class UserDTO {
     private String username;
     private String password;
-    private List<ERole> ERoleList = new ArrayList<>();
+    private List<ERole> roleList = new ArrayList<>();
 
 }

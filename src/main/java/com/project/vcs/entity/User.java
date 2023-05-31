@@ -24,9 +24,6 @@ public class User {
 
     @JsonIgnore
     private String password;
-    @Transient
-    private List<ERole> ERoleList = new ArrayList<>();
-
     @OneToMany(mappedBy = "users", cascade = CascadeType.PERSIST)
     private List<UserRoleAssignment> roles = new ArrayList<>();
     public User(String username, String password) {
