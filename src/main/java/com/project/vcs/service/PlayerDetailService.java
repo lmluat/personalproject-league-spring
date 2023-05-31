@@ -1,34 +1,38 @@
 package com.project.vcs.service;
 
 import com.project.vcs.dto.PlayerDetailDTO;
-import com.project.vcs.dto.custom.MVPCountPlayerDTO;
-import com.project.vcs.entity.*;
+import com.project.vcs.entity.Player;
+import com.project.vcs.entity.PlayerDetail;
+import com.project.vcs.entity.TeamDetail;
+import com.project.vcs.entity.Tournament;
 import com.project.vcs.exception.DemoException;
-import com.project.vcs.repository.MatchDetailRepository;
 import com.project.vcs.repository.PlayerDetailRepository;
 import com.project.vcs.repository.PlayerRepository;
 import com.project.vcs.repository.TeamDetailRepository;
 //import com.project.vcs.service.mapper.PlayerDetailMapper;
+import com.project.vcs.repository.TournamentRepository;
 import com.project.vcs.service.mapper.PlayerDetailMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class PlayerDetailService {
     private final PlayerDetailRepository playerDetailRepository;
     private final PlayerRepository playerRepository;
     private final TeamDetailRepository teamDetailRepository;
-    private final MatchDetailRepository matchDetailRepository;
+    private final TournamentRepository tournamentRepository;
     public List<PlayerDetailDTO> getAllPlayerDetail(){
         return PlayerDetailMapper.INSTANCE.toDTOs(playerDetailRepository.findAll());
     }
     public PlayerDetailDTO createPlayerDetail(PlayerDetailDTO playerDetailDTO, Long teamDetailId){
-        TeamDetail teamDetail = teamDetailRepository.findById(teamDetailId).get();
+        TeamDetail teamDetail = teamDetailRepository.findById(teamDetailId).orElseThrow(DemoException::PlayerDetailNotFound);
 
          PlayerDetail playerDetail = PlayerDetail.builder()
                  .teamDetail(teamDetail)
@@ -66,17 +70,13 @@ public class PlayerDetailService {
         playerDetailRepository.save(playerDetail);
         return PlayerDetailMapper.INSTANCE.toDTO(playerDetail);
     }
-    public List<MVPCountPlayerDTO> getCountOfMVPPlayers(String tournamentName){
+    public List<PlayerDetailDTO> getPlayerDetailListByTournament(String tournamentName){
+        Tournament tournament = tournamentRepository.findBytournamentName(tournamentName).orElseThrow(DemoException::TournamentNotFound);
 
-        List<String> listIngameName = playerDetailRepository.getDistinctPlayerIngameNamesByTournament(tournamentName);
-
-        List<MVPCountPlayerDTO> mvpCountPlayerDTOS = new ArrayList<>();
-
-        listIngameName.forEach(ingameName -> {
-            Integer numberOfMVP = playerDetailRepository.getCountOfMvpPlayers(ingameName,tournamentName);
-            mvpCountPlayerDTOS.add(new MVPCountPlayerDTO(ingameName,numberOfMVP));
-        });
-        return mvpCountPlayerDTOS;
+        List<PlayerDetail> playerDetailList = playerDetailRepository.findAll().stream()
+                .filter(p -> p.getTeamDetail().getTournament().equals(tournament))
+                .collect(Collectors.toList());
+        return PlayerDetailMapper.INSTANCE.toDTOs(playerDetailList);
     }
 
 }

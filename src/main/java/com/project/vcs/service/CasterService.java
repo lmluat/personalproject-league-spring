@@ -6,7 +6,9 @@ import com.project.vcs.exception.DemoException;
 import com.project.vcs.repository.CasterRepository;
 import com.project.vcs.service.mapper.CasterMapper;
 import lombok.RequiredArgsConstructor;
+
 import lombok.extern.java.Log;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +34,7 @@ public class CasterService {
     }
     public CasterDTO updateCaster(CasterDTO casterDTO, Long casterId){
         Caster caster = casterRepository.findById(casterId).orElseThrow(DemoException::CasterNotFound);
-
+        log.error(DemoException.CasterNotFound().getMessage());
         if (casterDTO.getLastName() != null) {
             caster.setLastName(casterDTO.getLastName());
         }
@@ -54,6 +56,7 @@ public class CasterService {
     }
     public void deleteCaster(Long casterId){
         Caster caster = casterRepository.findById(casterId).orElseThrow(DemoException::CasterNotFound);
+        log.error(DemoException.CasterNotFound().getMessage());
         casterRepository.delete(caster);
     }
 }

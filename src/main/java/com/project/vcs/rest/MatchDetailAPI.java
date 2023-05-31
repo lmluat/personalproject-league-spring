@@ -20,9 +20,8 @@ public interface MatchDetailAPI {
     @PostMapping("/{matchid}")
     ResponseEntity<MatchDetailDTO> createMatchDetail(@PathVariable("matchid") Long id,
                                                      @Valid @RequestBody MatchDetailDTO matchDetailDTO);
-    @PutMapping("/{matchid}/{gameid}")
-    ResponseEntity<MatchDetailDTO> updateMatchDetail(@PathVariable("matchid") Long matchId,
-                                                     @PathVariable("gameid") @Min(1) @Max(3) int gameId,
+    @PutMapping("/{matchdetailid}")
+    ResponseEntity<MatchDetailDTO> updateMatchDetail(@PathVariable("matchdetailid") Long matchDetailId,
                                                      @RequestBody MatchDetailDTO matchDetailDTO);
     @GetMapping("/{tournamentid}")
     ResponseEntity<List<MatchScheduleTournamentDTO>> getMatchScheduleByTournament(@PathVariable("tournamentid") Long tournamentId);

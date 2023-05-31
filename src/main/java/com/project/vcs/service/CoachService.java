@@ -6,11 +6,13 @@ import com.project.vcs.exception.DemoException;
 import com.project.vcs.repository.CoachRepository;
 import com.project.vcs.service.mapper.CoachMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class CoachService {
     private final CoachRepository coachRepository;
@@ -31,7 +33,7 @@ public class CoachService {
     }
     public CoachDTO updateCoach(CoachDTO coachDTO, Long id){
         Coach coach = coachRepository.findById(id).orElseThrow(DemoException::CoachNotFound);
-
+        log.error(DemoException.CoachNotFound().getMessage());
         if(coachDTO.getFirstName() != null){
             coach.setFirstName(coachDTO.getFirstName());
         }
@@ -54,6 +56,11 @@ public class CoachService {
         coachRepository.save(coach);
         return CoachMapper.INSTANCE.toDTO(coach);
 
+    }
+    public void deleteCoach(Long coachId){
+        Coach coach = coachRepository.findById(coachId).orElseThrow(DemoException::CoachNotFound);
+        log.error(DemoException.CoachNotFound().getMessage());
+        coachRepository.delete(coach);
     }
 
 }
